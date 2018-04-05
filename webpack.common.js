@@ -14,12 +14,13 @@ var _default = {
   // ES6 version of module.exports
   name: 'app',
   // optional
-  entry: './src/app.js',
+  entry: "./src/app.js",
   output: {
-    filename: 'bundle.js',
+    // filename: 'bundle.js', => We don't need this anymore. We'll use the ones in the dev & prod config files.
     path: _path.default.resolve(__dirname, 'dist') // resolve slash incompatibility with Windows.
 
   },
+  // we moved devserver in the dev config file.
   module: {
     rules: [{
       test: /\.js$/,

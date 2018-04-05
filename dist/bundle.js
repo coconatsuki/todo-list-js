@@ -76,10 +76,9 @@
   !*** ./src/app.js ***!
   \********************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-eval("\n\nconsole.log(\"rien\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYXBwLmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vL3NyYy9hcHAuanM/MmM5NyJdLCJzb3VyY2VzQ29udGVudCI6WyJjb25zb2xlLmxvZyhcInJpZW5cIik7XHJcbiJdLCJtYXBwaW5ncyI6Ijs7QUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/app.js\n");
+eval("throw new Error(\"Module build failed: SyntaxError: /mnt/d/CODE/Projets/JAVASCRIPT/todo-list/package.json: Error while parsing JSON - Unexpected token } in JSON at position 363\\n    at JSON.parse (<anonymous>)\\n    at /mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/files/configuration.js:197:22\\n    at /mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/files/configuration.js:251:12\\n    at cachedFunction (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/caching.js:42:17)\\n    at readConfig (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/files/configuration.js:138:8)\\n    at /mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/files/configuration.js:84:22\\n    at Array.reduce (<anonymous>)\\n    at findRelativeConfig (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/files/configuration.js:81:74)\\n    at buildRootChain (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/config-chain.js:101:61)\\n    at loadPrivatePartialConfig (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/partial.js:51:53)\\n    at loadFullConfig (/mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/config/full.js:43:37)\\n    at /mnt/d/CODE/Projets/JAVASCRIPT/todo-list/node_modules/@babel/core/lib/transform.js:28:33\\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\\n    at process._tickCallback (internal/process/next_tick.js:180:9)\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYXBwLmpzLmpzIiwic291cmNlcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/app.js\n");
 
 /***/ })
 
