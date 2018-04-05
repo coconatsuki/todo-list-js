@@ -1,0 +1,22 @@
+{
+  "name": "my-great-package",
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:coconatsuki/todo-list-js.git",
+  "author": "coconatsuki",
+  "license": "MIT",
+  "scripts": {
+    "dev": "babel webpack.common.babel.js > webpack.common.js && webpack --config webpack.common.js --progress -d --watch"
+  },
+  "browserslist": [
+    "> 1%"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "babel-loader": "^8.0.0-beta.2",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  }
+}
