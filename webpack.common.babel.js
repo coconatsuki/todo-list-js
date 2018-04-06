@@ -32,11 +32,24 @@ export default { // ES6 version of module.exports
           } // We can also use file-loader only, and make requests for each image.
         },
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           use: ExtractTextPlugin.extract( // By default, the css will be loaded in the js file, where we imported it.
             { // This plugin will try to extract it
-              use: 'css-loader', // This loader will try to make a separate css file.
-              // (We have to precise in DEV & PROD which name it musts give the file)
+              use: [{
+                loader: 'css-loader', // This loader will try to make a separate css file.
+                // (We have to precise in DEV & PROD which name it musts give the file)
+                options: {
+                  url: false,
+                  minimize: true, // On ajoute des options pour le minifier
+                  sourceMap: true // et pour ajouter des sourceMap.
+                }
+              },
+              {
+                loader: 'sass-loader', // We also add a loader for the sass
+                options: {
+                  sourceMap: true // with sourceMaps
+                }
+              }],
               fallback: 'style-loader', // If it doesn't work, this loader extracts it from the JSfile and put in the html Head instead.
             },
           ),
