@@ -26,8 +26,13 @@ var _default = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader' // use babel to transform ES6 into ES5
-      // it's better to write Babel config in its own file .babelrc, to use it outsite of webpack.
 
+    }, // it's better to write Babel config in its own file .babelrc, to use it outsite of webpack.
+    {
+      test: /\.(html)$/,
+      use: {
+        loader: 'html-loader'
+      }
     }]
   }
 };

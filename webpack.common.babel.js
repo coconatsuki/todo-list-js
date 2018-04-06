@@ -1,4 +1,7 @@
 import path from 'path' //ES6 version of: const path = require('path')
+import webpack from 'webpack' // We need to import it here to use the "webpack.optimize.OccurrenceOrderPlugin()" below.
+import CleanWebpackPlugin from 'clean-webpack-plugin' // Clean dist content before each build.
+import HtmlWebpackPlugin from 'html-webpack-plugin' // Will import content in the html file.
 
 export default { // ES6 version of module.exports
   name: 'app', // optional
@@ -14,7 +17,31 @@ export default { // ES6 version of module.exports
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader', // use babel to transform ES6 into ES5
-      } // it's better to write Babel config in its own file .babelrc, to use it outsite of webpack.
+      }, // it's better to write Babel config in its own file .babelrc, to use it outsite of webpack.
+      {
+        test: /\.(html)$/, // Will load the html from src and make it available to the html plugins to transform them.
+        use: {
+          loader: 'html-loader',
+        },
+        {
+          test: /\.(png|gif|jpg|jpeg|svg)$/, // Will load these files from /src
+          loader: 'url-loader',  // if the file < 8192 bytes (like an icon) it will use url-loader
+          options: { // which transform it in a string directly into the html (avoiding a request to fetch it).
+            limit: 8192, // if the file is bigger
+            fallback: 'file-loader', // We'll use 'file-loader' instead, which will create a separated file, and cache it using a hashcode as a name.
+          } // We can also use file-loader only, and make requests for each image.
+        },
+        {
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract( // By default, the css will be loaded in the js file, where we imported it.
+            { // This plugin will try to extract it
+              use: 'css-loader', // This loader will try to make a separate css file.
+              // (We have to precise in DEV & PROD which name it musts give the file)
+              fallback: 'style-loader', // If it doesn't work, this loader extracts it from the JSfile and put in the html Head instead.
+            },
+          ),
+        },
+      }
     ]
   }
 }

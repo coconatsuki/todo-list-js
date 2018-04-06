@@ -26,7 +26,7 @@ var client = {
 
 };
 
-var _default = (0, _webpackMerge.default)(_webpack.default, client); // will merge this file and the .common one.
+var _default = (0, _webpackMerge.default)(_webpack.default, client); // will export the result of merging this file with the .common config file.
 // the difference with the prod is the source-map, the dev-server, and the mode: 'development'.
 
 
