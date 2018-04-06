@@ -1,4 +1,5 @@
 import merge from 'webpack-merge' // needs to be installed with yarn, with -D
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 import common from './webpack.common'
 
