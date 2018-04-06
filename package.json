@@ -9,7 +9,7 @@
     "common:babel": "babel webpack.common.babel.js > webpack.common.js",
     "dev:babel": "yarn common:babel && babel webpack.dev.babel.js > webpack.dev.js",
     "prod:babel": "yarn common:babel webpack.prod.babel.js > webpack.prod.js",
-    "dev": "yarn dev:babel && webpack-dev-server --port 8081 --config webpack.common.js -d --progress",
+    "dev": "yarn dev:babel && webpack-dev-server --port 8081 --config webpack.dev.js -d --progress",
     "prod": "yarn prod:babel && webpack --config webpack.prod.js --progress -p"
   },
   "browserslist": [

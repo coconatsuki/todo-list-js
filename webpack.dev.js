@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _webpackMerge = _interopRequireDefault(require("webpack-merge"));
 
+var _extractTextWebpackPlugin = _interopRequireDefault(require("extract-text-webpack-plugin"));
+
 var _webpack = _interopRequireDefault(require("./webpack.common"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -25,7 +27,7 @@ var client = {
 
   },
   // Needs to be launched with 'webpack-dev-server' => see package.json script.
-  plugins: [new ExtractTextPlugin({
+  plugins: [new _extractTextWebpackPlugin.default({
     // This will tell the Plugin which name to give the css file it will extract from the app.js file.
     filename: 'css/[name].css',
     // So, we tell it to use the original name (from the /src folder).
