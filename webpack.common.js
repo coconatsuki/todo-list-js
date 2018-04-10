@@ -55,8 +55,9 @@ var _default = {
         // which transform it in a string directly into the html (avoiding a request to fetch it).
         limit: 8192,
         // if the file is bigger
-        fallback: 'file-loader' // We'll use 'file-loader' instead, which will create a separated file, and cache it using a hashcode as a name.
-        // We can also use file-loader only, and make requests for each image.
+        fallback: 'file-loader',
+        // We'll use 'file-loader' instead, which will create a separated file, and cache it using a hashcode as a name.
+        name: './css/[hash]-[name].[ext]' // We can also use file-loader only, and make requests for each image.
 
       }
     }, {
@@ -69,7 +70,6 @@ var _default = {
           // This loader will try to make a separate css file.
           // (We have to precise in DEV & PROD which name it musts give the file)
           options: {
-            url: false,
             minimize: true,
             // On ajoute des options pour le minifier
             sourceMap: true // et pour ajouter des sourceMap.

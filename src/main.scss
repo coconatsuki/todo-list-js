@@ -1,6 +1,43 @@
-$blue: #4b62f9;
-$grey: #eaeaea;
+@import "~bootstrap/scss/bootstrap";
 
-h1 {
-  color: $blue;
+$deep-blue: #49516f;
+$sky-blue: #6279b8;
+$pastel-blue: #8ea4d2;
+$dark-green: #496f5d;
+$light-green: #4c9f70;
+
+$pacifico-font: 'Pacifico', Arial, cursive;
+
+
+// -------------------------------GENERAL -------------------------------\\
+
+
+
+// -------------------------------TITLE-ROW -------------------------------\\
+
+.title-row {
+  background-color: $deep-blue;
+  border-bottom: 8px dashed #8ea4d2;
+  box-shadow: 0 1px 6px rgba(29, 68, 131, 1);
+  h1 {
+    color: white;
+    font-family: $pacifico-font;
+  }
+}
+
+// ------------------------------- SIDEBAR -------------------------------\\
+
+.lists-sidebar {
+  border-right: 6px double $deep-blue;
+}
+
+.sidebar-title h4 {
+  text-align: center;
+}
+
+
+// ------------------------------ CURRENT LIST -------------------------------\\
+
+.current-list-container {
+  background: url("./css/coffee-note.jpg") no-repeat;
 }

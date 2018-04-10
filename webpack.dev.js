@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var client = {
   mode: 'development',
   output: {
-    filename: 'js/[name].js' // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
+    filename: './[name].js' // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
 
   },
   devtool: 'inline-source-map',
@@ -29,7 +29,7 @@ var client = {
   // Needs to be launched with 'webpack-dev-server' => see package.json script.
   plugins: [new _extractTextWebpackPlugin.default({
     // This will tell the Plugin which name to give the css file it will extract from the app.js file.
-    filename: 'css/[name].css',
+    filename: './[name].css',
     // So, we tell it to use the original name (from the /src folder).
     allChunks: true // ?
 

@@ -2,9 +2,41 @@
 <html>
 <head>
   <title>My todo list</title>
-  <!-- <link rel="stylesheet"  href="main.css"> -->
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
 <body>
-  <h1>Todo list</h1>
+  <div class="container-fluid">
+    <section class="row title-row d-flex justify-content-center">
+      <h1 class="p-2">Your To-Do List</h1>
+    </section>
+    <main class="row">
+      <section class="lists-sidebar col-md-2 p-3">
+        <div class="sidebar-title">
+          <h4 class="text-center">Lists of tasks</h4>
+          <button type="button" class="btn btn-primary">Add task</button>
+        </div>
+        <div class="lists-container">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Current list</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Garden</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Shopping</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="current-list-container col-md-10">
+
+      </section>
+    </main>
+  </div>
+
 </body>
 </html>
