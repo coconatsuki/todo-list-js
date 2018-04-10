@@ -6,7 +6,7 @@ import common from './webpack.common'
 const client = {
   mode: 'development',
   output: {
-    filename: './[name].js', // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
+    filename: './js/[name].js', // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
   },
   devtool: 'inline-source-map',
   devServer: { // Use files in /src to generate a virtual bundle.js, and show /dist content (index.html) on localhost:8080 by default (here, 8081)

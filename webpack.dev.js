@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var client = {
   mode: 'development',
   output: {
-    filename: './[name].js' // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
+    filename: './js/[name].js' // Use the original name (from /src) for the JS output file. We don't need to use caching in dev.
 
   },
   devtool: 'inline-source-map',

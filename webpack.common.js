@@ -26,7 +26,7 @@ var _default = {
   // ES6 version of module.exports
   name: 'app',
   // optional
-  entry: "./src/app.js",
+  entry: './src/js/app.js',
   output: {
     // filename: 'bundle.js', => We don't need this anymore. We'll use the ones in the dev & prod config files.
     path: _path.default.resolve(__dirname, 'dist') // resolve slash incompatibility with Windows.
@@ -57,7 +57,7 @@ var _default = {
         // if the file is bigger
         fallback: 'file-loader',
         // We'll use 'file-loader' instead, which will create a separated file, and cache it using a hashcode as a name.
-        name: './css/[hash]-[name].[ext]' // We can also use file-loader only, and make requests for each image.
+        name: './images/[hash]-[name].[ext]' // We can also use file-loader only, and make requests for each image.
 
       }
     }, {
