@@ -10,30 +10,198 @@
       <h1 class="p-2">Your To-Do List</h1>
     </section>
     <main class="row">
+
+      <!-- Modal -->
+      <div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add a new to-do list</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="list-name" class="col-form-label">List name:</label>
+                  <input type="text" class="form-control" id="list-name">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="new-list-button">Add list</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section class="lists-sidebar col-md-2 p-3">
         <div class="sidebar-title">
-          <h4 class="text-center">Lists of tasks</h4>
-          <button type="button" class="btn btn-primary">Add task</button>
+          <h4 class="text-center">All lists</h4>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#listModal">Add a list</button>
         </div>
-        <div class="lists-container">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Current list</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Garden</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Shopping</a>
-            </li>
-          </ul>
-        </div>
-      </section>
-      <section class="current-list-container col-md-10">
 
+        <ul class="list-group list-group-flush" id="list-group">
+          <li class="list-group-item list-group-item-action active d-flex" data-id="1"><a href="#">Current list</a><i class="bin"></i></li>
+          <li class="list-group-item list-group-item-action d-flex" data-id="2"><a href="#">Garden</a><i class="bin"></i></li>
+          <li class="list-group-item list-group-item-action d-flex" data-id="3"><a href="#">Shopping</a><i class="bin"></i></li>
+          <li class="list-group-item list-group-item-action d-flex" data-id="4"><a href="#">Parties & Events</a><i class="bin"></i></li>
+          <li class="list-group-item list-group-item-action d-flex" data-id="5"><a href="#">Work</a><i class="bin"></i></li>
+        </ul>
+      </section>
+
+      <!-- Modal -->
+      <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add a new task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="d-flex">
+                <div class="form-group">
+                  <label for="date-name" class="col-form-label">Date:</label>
+                  <input type="date" name="date" class="form-control" id="task-date">
+                </div>
+                <div class="form-group">
+                  <label for="hour-text" class="col-form-label">Hour:</label>
+                  <input type="time" name="time" class="form-control" id="task-hour">
+                </div>
+                <div class="form-group">
+                  <label for="normal" class="col-form-label">Priority:</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="normal" value="normal-option" checked>
+                    <label class="form-check-label" for="priorityRadios1">
+                      Normal
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="high" value="high-option">
+                    <label class="form-check-label" for="priorityRadios2">
+                      High
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="low" value="low-option">
+                    <label class="form-check-label" for="priorityRadios3">
+                      Low
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="description-text" class="col-form-label">Description:</label>
+                  <textarea class="form-control" id="task-description"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="new-task-button">Add task</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="current-list-container col-md-10 d-flex justify-content-center">
+        <div class="current-list-block d-flex flex-column align-items-center">
+          <div class="current-list-title d-flex justify-content-center">
+            <h2>Home</h2>
+          </div>
+          <button type="button" class="btn btn-primary" id="new-task-button" data-toggle="modal" data-target="#taskModal">Add new task</button>
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Task</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Done?</th>
+                </tr>
+              </thead>
+              <tbody id="task-table-body">
+                <tr data-id="1" list-id ="1">
+                  <th scope="row">April 10th</th>
+                  <td>18:00</td>
+                  <td><strong>Post Yudai's present</strong></td>
+                  <td>Moderate</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="2" list-id ="1">
+                  <th scope="row">April 11th</th>
+                  <td>14:15</td>
+                  <td><strong>French class</strong></td>
+                  <td>High</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="3" list-id ="1">
+                  <th scope="row">April 12th</th>
+                  <td>14:00</td>
+                  <td><strong>Fetch Mathieu</strong></td>
+                  <td>Moderate</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="4" list-id ="1">
+                  <th scope="row">April 12th</th>
+                  <td>19:00</td>
+                  <td><strong>Dance class</strong></td>
+                  <td>Moderate</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="5" list-id ="1">
+                  <th scope="row">April 10th</th>
+                  <td>18:00</td>
+                  <td><strong>Post Yudai's present</strong></td>
+                  <td>Moderate</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr data-id="6" list-id ="1">
+                  <th scope="row">April 11th</th>
+                  <td>14:15</td>
+                  <td><strong>French class</strong></td>
+                  <td>High</td>
+                  <td>
+                    <div class="form-check form-check-inline d-flex justify-content-around">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                      <i class="bin"></i>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
     </main>
   </div>

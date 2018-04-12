@@ -11,7 +11,16 @@ $pacifico-font: 'Pacifico', Arial, cursive;
 
 // -------------------------------GENERAL -------------------------------\\
 
+main.row {
+  min-height: 650px;
+  max-height: 650px;
+}
 
+i {
+  height: 20px;
+  width: 20px;
+  display: block;
+}
 
 // -------------------------------TITLE-ROW -------------------------------\\
 
@@ -25,14 +34,49 @@ $pacifico-font: 'Pacifico', Arial, cursive;
   }
 }
 
+
 // ------------------------------- SIDEBAR -------------------------------\\
 
 .lists-sidebar {
   border-right: 6px double $deep-blue;
+  overflow-y: auto;
+  .list-group {
+    margin-top: 15%;
+  }
 }
 
-.sidebar-title h4 {
-  text-align: center;
+.list-group li {
+  justify-content: space-between;
+  display: flex;
+  i {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: $dark-green;
+    width: 70%;
+  }
+  &.active {
+    background-color: #f8f9fa;
+    border-bottom: 2px dashed $dark-green;
+    border-top: none;
+    a {
+      font-weight: 600;
+    }
+  }
+}
+
+.sidebar-title {
+  h4 {
+    text-align: center;
+    color: $deep-blue;
+    font-weight: 700;
+    font-size: 2em;
+  }
+  button {
+    width: 100%;
+    background-color: $dark-green;
+  }
 }
 
 
@@ -40,4 +84,52 @@ $pacifico-font: 'Pacifico', Arial, cursive;
 
 .current-list-container {
   background: url("./images/coffee-note.jpg") no-repeat;
+  background-size: cover;
+}
+
+.current-list-block {
+  margin-top: 3%;
+  height: 85%;
+  width: 65%;
+  background-color: white;
+  opacity: 0.94;
+  border-radius: 25%;
+  box-shadow: 0 1px 6px rgba(94, 73, 76, 1);
+  .table-container {
+    overflow-y: auto;
+    width: 85%;
+    max-height: 70%;
+    }
+  .table {
+    margin-top: 5%;
+    width: 90%;
+  }
+  button {
+      width: 75%;
+      background-color: $dark-green;
+  }
+}
+
+.bin  {
+  background: url("./images/recycle-bin.png") no-repeat;
+}
+
+.current-list-title {
+  // border-bottom: 2px dashed $pastel-blue;
+  width: 80%;
+  h2 {
+    color: $deep-blue;
+    font-weight: 700;
+    font-size: 3em;
+  }
+}
+
+
+// ------------------------------ TASK MODAL -------------------------------\\
+
+#taskModal .form-group {
+  margin: 0 3%;
+  &:last-child {
+    width: 60%;
+  }
 }
