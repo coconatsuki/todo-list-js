@@ -10,9 +10,7 @@ const Ui = (() => {
   const checkedPriorityInput = document.querySelector('input[name="priorityRadios"]:checked');
   const descriptionInput = document.getElementById('task-description');
 
-  const getCurrentListId = () => {
-    return Number(document.querySelector('.lists-sidebar .list-group-item.active').dataset.id);
-  }
+  const getCurrentListId = () => Number(document.querySelector('.lists-sidebar .list-group-item.active').dataset.id);
 
   // Get Values from the inputs:
 
@@ -24,7 +22,7 @@ const Ui = (() => {
     const checkedPriority = checkedPriorityInput.value;
     const description = descriptionInput.value;
     return {
-      date, hour, checkedPriority, description,
+      date, hour, description, checkedPriority
     };
   };
 
@@ -55,8 +53,8 @@ const Ui = (() => {
     const descriptionString = `<td><strong>${task.description}</strong></td>`;
     const priorityString = `<td><strong>${task.priority}</strong></td>`;
     const eraseOptionString = `<td><div class="form-check form-check-inline d-flex justify-content-around">
-    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-    <i class="bin"></i></div></td>`;
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                              <i class="bin"></i></div></td>`;
     newRow.innerHTML = dateString + hourString + descriptionString +
     priorityString + eraseOptionString;
     newRow.setAttribute('data-id', task.id);

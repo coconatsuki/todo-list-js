@@ -124,6 +124,22 @@ i {
   }
 }
 
+#task-table-body .edit-column {
+  padding-top: 15%;
+  display: flex;
+  justify-content: center;
+}
+
+#edit-task-button {
+  padding: 5%;
+  border: none;
+  background-color: transparent;
+  i {
+    background: url("./images/edit2.png") no-repeat;
+    background-position: -5px -2px;
+  }
+}
+
 
 // ------------------------------ TASK MODAL -------------------------------\\
 

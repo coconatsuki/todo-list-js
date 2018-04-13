@@ -6,8 +6,8 @@ class List {
     this.taskNumber = 0;
   }
 
-  addTaskToList(task) {
-    this.task.push(task);
+  addTask(task) {
+    this.tasks.push(task);
     this.taskNumber += 1;
   }
 

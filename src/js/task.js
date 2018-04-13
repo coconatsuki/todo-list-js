@@ -1,9 +1,9 @@
 class Task {
-  constructor(list, date, hour, description, priority) {
-    this.date = date;
-    this.hour = hour;
-    this.description = description;
-    this.priority = priority;
+  constructor(list, options) {
+    this.date = options.date;
+    this.hour = options.hour;
+    this.description = options.description;
+    this.priority = options.checkedPriority;
     this.list = list;
     this.id = 1;
   }

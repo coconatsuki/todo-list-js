@@ -16,16 +16,15 @@ const Controller = (() => {
   const allLists = [];
 
   const getCurrentList = () => {
-    const listId = Ui.getCurrentListId;
+    const listId = Ui.getCurrentListId();
     const currentList = allLists.find(list => list.id === listId);
     return currentList;
   };
 
   const createNewTask = (currentList) => {
-    const taskValues = Ui.getNewTaskValues;
-    const newTask = new Task(taskValues);
+    const taskValues = Ui.getNewTaskValues();
+    const newTask = new Task(currentList, taskValues);
     newTask.id = currentList.taskNumber;
-    newTask.list = currentList;
     return newTask;
   };
 
@@ -33,7 +32,7 @@ const Controller = (() => {
 
   const addListenerToListButton = function() {
     newListButton.addEventListener('click', () => {
-      const listName = Ui.getNewListName;
+      const listName = Ui.getNewListName();
       const newList = new List(listNumber, listName);
       const listId = newList.id;
       Ui.displayNewList(listName, listId);
@@ -50,11 +49,18 @@ const Controller = (() => {
       Ui.displayNewTask(newTask);
     });
   };
+
   return {
     addListenerToListButton,
     addListenerToTaskButton,
+    allLists,
   };
 })();
 
-addListenerToListButton();
-addListenerToTaskButton();
+Controller.addListenerToListButton();
+Controller.addListenerToTaskButton();
+
+// For testing the app only:
+
+const testList = new List(1, "testList");
+Controller.allLists.push(testList);
