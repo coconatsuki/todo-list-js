@@ -68,12 +68,22 @@ const Ui = (() => {
     $('#taskModal').modal('toggle');
   };
 
+  // useful for the Edit Task Button:
+
+  const fillModalwithTaskValues = (taskValues) => {
+    dateInput.value = taskValues.date;
+    hourInput.value = taskValues.hour;
+    checkedPriorityInput.value = taskValues.priority;
+    descriptionInput.value = taskValues.description;
+  };
+
   return {
     displayNewList,
     displayNewTask,
     getCurrentListId,
     getNewListName,
     getNewTaskValues,
+    fillModalwithTaskValues,
   };
 })();
 

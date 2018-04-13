@@ -130,10 +130,17 @@ i {
   justify-content: center;
 }
 
-#edit-task-button {
+.edit-column button {
   padding: 5%;
   border: none;
   background-color: transparent;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $dark-green;
+  }
+  &:active {
+    background-color: $pastel-blue !important;
+  }
   i {
     background: url("./images/edit2.png") no-repeat;
     background-position: -5px -2px;

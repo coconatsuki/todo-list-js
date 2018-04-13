@@ -12,6 +12,7 @@ import Task from './task';
 const Controller = (() => {
   const newListButton = document.getElementById('new-list-button');
   const newTaskButton = document.getElementById('new-task-button');
+  const editTaskButtons = document.querySelectorAll('.edit-column button');
   let listNumber = 1;
   const allLists = [];
 
@@ -50,17 +51,57 @@ const Controller = (() => {
     });
   };
 
+  // Edit task button listener:
+
+  const getTaskId = function(taskElement) {
+    Number(taskElement.dataset.id);
+  };
+
+  const getTaskList = function(taskElement) {
+    Number(taskElement.dataset.list);
+  };
+
+  const getTask = (taskList, taskId) => {
+    const currentList = allLists.find(list => list.id === taskList);
+    const currentTask = currentList.tasks.find(task => task.id === taskId);
+    return currentTask;
+  };
+
+  // const getTaskValues = (task) => {
+  //   return { task.date, task.hour, task.priority, task.description };
+  // };
+
+  // task.parentNode.removeChild(task)
+
+  const addListenerToEditTaskButton = function() {
+    for (const editTaskButton of editTaskButtons) {
+      editTaskButton.addEventListener('click', function() {
+        console.log(this);
+        const taskElement = this.parentElement.parentElement;
+        const taskList = getTaskList(taskElement);
+        const taskId = getTaskId(taskElement);
+        const task = getTask(taskList, taskId);
+        // const taskValues = getTaskValues(task);
+        Ui.fillModalwithTaskValues(taskValues);
+      });
+    }
+  };
+
   return {
     addListenerToListButton,
     addListenerToTaskButton,
+    addListenerToEditTaskButton,
     allLists,
   };
 })();
 
 Controller.addListenerToListButton();
 Controller.addListenerToTaskButton();
+Controller.addListenerToEditTaskButton();
 
 // For testing the app only:
 
-const testList = new List(1, "testList");
+const allTestTasks = Array.from(document.querySelectorAll('#task-table-body tr'));
+const testList = new List(1, 'testList');
 Controller.allLists.push(testList);
+allTestTasks.forEach(tr => testList.tasks.push(tr));
