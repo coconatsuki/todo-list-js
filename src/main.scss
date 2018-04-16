@@ -150,7 +150,7 @@ i {
 
 // ------------------------------ TASK MODAL -------------------------------\\
 
-#taskModal .form-group {
+#taskModal .form-group, #edit-task-modal .form-group {
   margin: 0 3%;
   &:last-child {
     width: 60%;

@@ -52,6 +52,63 @@
         </ul>
       </section>
 
+      <!-- EDIT MODAL -->
+
+      <div class="modal fade" id="edit-task-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="edit-task-modal-Label">Edit task</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="d-flex">
+                <div class="form-group">
+                  <label for="date-name" class="col-form-label">Date:</label>
+                  <input type="date" name="date" class="form-control" id="edit-task-date">
+                </div>
+                <div class="form-group">
+                  <label for="hour-text" class="col-form-label">Hour:</label>
+                  <input type="time" name="time" class="form-control" id="edit-task-hour">
+                </div>
+                <div class="form-group">
+                  <label for="normal" class="col-form-label">Priority:</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="edit-priorityRadios" id="normal" value="Moderate" checked>
+                    <label class="form-check-label" for="priorityRadios1">
+                      Normal
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="edit-priorityRadios" id="high" value="High">
+                    <label class="form-check-label" for="priorityRadios2">
+                      High
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="edit-priorityRadios" id="low" value="Low">
+                    <label class="form-check-label" for="priorityRadios3">
+                      Low
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="description-text" class="col-form-label">Description:</label>
+                  <textarea class="form-control" id="edit-task-description"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="edit-task-button">Edit task</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Modal -->
       <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -75,19 +132,19 @@
                 <div class="form-group">
                   <label for="normal" class="col-form-label">Priority:</label>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="priorityRadios" id="normal" value="normal-option" checked>
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="normal" value="Moderate" checked>
                     <label class="form-check-label" for="priorityRadios1">
                       Normal
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="priorityRadios" id="high" value="high-option">
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="high" value="High">
                     <label class="form-check-label" for="priorityRadios2">
                       High
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="priorityRadios" id="low" value="low-option">
+                    <input class="form-check-input" type="radio" name="priorityRadios" id="low" value="Low">
                     <label class="form-check-label" for="priorityRadios3">
                       Low
                     </label>
@@ -139,7 +196,7 @@
                     </div>
                   </td>
                   <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
                       <i ></i>
                     </button>
                   </td>
@@ -156,7 +213,7 @@
                     </div>
                   </td>
                   <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
                       <i ></i>
                     </button>
                   </td>
@@ -173,7 +230,7 @@
                     </div>
                   </td>
                   <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
                       <i ></i>
                     </button>
                   </td>
@@ -190,43 +247,9 @@
                     </div>
                   </td>
                   <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
+                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
                       <i ></i>
                     </button>
-                  </td>
-                </tr>
-                <tr data-id="5" data-list="1">
-                  <th scope="row">April 10th</th>
-                  <td>18:00</td>
-                  <td><strong>Post Yudai's present</strong></td>
-                  <td>Moderate</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                  </td>
-                  <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
-                      <i ></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr data-id="6" data-list="1">
-                  <th scope="row">April 11th</th>
-                  <td>14:15</td>
-                  <td><strong>French class</strong></td>
-                  <td>High</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                    <td class="edit-column">
-                      <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#taskModal">
-                        <i></i>
-                      </button>
-                    </td>
                   </td>
                 </tr>
               </tbody>

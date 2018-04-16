@@ -1,13 +1,20 @@
 class Task {
-  constructor(list, options) {
+  constructor(list, options = {}) {
     this.date = options.date;
     this.hour = options.hour;
     this.description = options.description;
     this.priority = options.checkedPriority;
     this.list = list;
-    this.id = 1;
+    this.id = options.id || 1; // to be checked
   }
 
+  get values() {
+    return {date: this.date,
+            hour: this.hour,
+            priority: this.priority,
+            description: this.description
+          };
+  }
 
   // bark() {
   //   console.log(`Bark Bark! My name is ${this.name}`)

@@ -1,6 +1,5 @@
 import $ from 'jquery';
 
-
 const Ui = (() => {
   const listGroup = document.getElementById('list-group');
   const newListInput = document.getElementById('list-name');
@@ -9,6 +8,12 @@ const Ui = (() => {
   const hourInput = document.getElementById('task-hour');
   const checkedPriorityInput = document.querySelector('input[name="priorityRadios"]:checked');
   const descriptionInput = document.getElementById('task-description');
+
+  const editModal = document.getElementById('edit-task-modal');
+  const editDateInput = document.getElementById('edit-task-date');
+  const editHourInput = document.getElementById('edit-task-hour');
+  const editCheckedPriorityInput = document.querySelector('input[name="edit-priorityRadios"]:checked');
+  const editDescriptionInput = document.getElementById('edit-task-description');
 
   const getCurrentListId = () => Number(document.querySelector('.lists-sidebar .list-group-item.active').dataset.id);
 
@@ -22,7 +27,7 @@ const Ui = (() => {
     const checkedPriority = checkedPriorityInput.value;
     const description = descriptionInput.value;
     return {
-      date, hour, description, checkedPriority
+      date, hour, description, checkedPriority,
     };
   };
 
@@ -55,8 +60,11 @@ const Ui = (() => {
     const eraseOptionString = `<td><div class="form-check form-check-inline d-flex justify-content-around">
                               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                               <i class="bin"></i></div></td>`;
+    const editString = `<td class="edit-column">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
+                        <i></i></button></td>`;
     newRow.innerHTML = dateString + hourString + descriptionString +
-    priorityString + eraseOptionString;
+    priorityString + eraseOptionString + editString;
     newRow.setAttribute('data-id', task.id);
     newRow.setAttribute('data-list', task.list);
     return newRow;
@@ -70,20 +78,43 @@ const Ui = (() => {
 
   // useful for the Edit Task Button:
 
-  const fillModalwithTaskValues = (taskValues) => {
-    dateInput.value = taskValues.date;
-    hourInput.value = taskValues.hour;
-    checkedPriorityInput.value = taskValues.priority;
-    descriptionInput.value = taskValues.description;
+  const cleanModal = () => {
+    dateInput.value = '';
+    hourInput.value = '';
+    checkedPriorityInput.value = '';
+    descriptionInput.value = '';
+  };
+
+  const cleanEditModal = () => {
+    editDateInput.value = '';
+    editHourInput.value = '';
+    editCheckedPriorityInput.value = '';
+    editDescriptionInput.value = '';
+  };
+
+  const fillEditModalwithTaskValues = (taskValues) => {
+    editDateInput.value = taskValues.date;
+    editHourInput.value = taskValues.hour;
+    editCheckedPriorityInput.value = taskValues.priority;
+    editDescriptionInput.value = taskValues.description;
+  };
+
+  const addListenerToNewEditTaskButton = function(taskValues) {
+    const newEditButton = document.querySelector('#task-table-body tr:last-child .edit-column button');
+    newEditButton.addEventListener('click', () => {
+      fillEditModalwithTaskValues(taskValues);
+    });
   };
 
   return {
+    addListenerToNewEditTaskButton,
+    cleanModal,
     displayNewList,
     displayNewTask,
     getCurrentListId,
     getNewListName,
     getNewTaskValues,
-    fillModalwithTaskValues,
+    fillEditModalwithTaskValues,
   };
 })();
 
