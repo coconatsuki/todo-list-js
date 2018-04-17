@@ -3,7 +3,7 @@ class Task {
     this.date = options.date;
     this.hour = options.hour;
     this.description = options.description;
-    this.priority = options.checkedPriority;
+    this.priority = options.priority;
     this.list = list;
     this.id = options.id || 1; // to be checked
   }

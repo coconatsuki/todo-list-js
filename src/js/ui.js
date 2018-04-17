@@ -6,14 +6,13 @@ const Ui = (() => {
   const tableBody = document.getElementById('task-table-body');
   const dateInput = document.getElementById('task-date');
   const hourInput = document.getElementById('task-hour');
-  const checkedPriorityInput = document.querySelector('input[name="priorityRadios"]:checked');
+  const checkedPriorityInput = () => (document.querySelector('input[name="priorityRadios"]:checked'));
   const descriptionInput = document.getElementById('task-description');
 
-  const editButton = document.getElementById('edit-task-button');
   const editModal = document.getElementById('edit-task-modal');
   const editDateInput = document.getElementById('edit-task-date');
   const editHourInput = document.getElementById('edit-task-hour');
-  const editCheckedPriorityInput = document.querySelector('input[name="edit-priorityRadios"]:checked');
+  const editCheckedPriorityInput = () => (document.querySelector('input[name="edit-priorityRadios"]:checked'));
   const editDescriptionInput = document.getElementById('edit-task-description');
 
   const getCurrentListId = () => Number(document.querySelector('.lists-sidebar .list-group-item.active').dataset.id);
@@ -25,20 +24,20 @@ const Ui = (() => {
   const getNewTaskValues = () => {
     const date = dateInput.value;
     const hour = hourInput.value;
-    const checkedPriority = checkedPriorityInput.value;
+    const priority = checkedPriorityInput().value;
     const description = descriptionInput.value;
     return {
-      date, hour, description, checkedPriority,
+      date, hour, description, priority,
     };
   };
 
   const getEditedValues = () => {
     const date = editDateInput.value;
     const hour = editHourInput.value;
-    const checkedPriority = editCheckedPriorityInput.value;
+    const priority = editCheckedPriorityInput().value;
     const description = editDescriptionInput.value;
     return {
-      date, hour, description, checkedPriority,
+      date, hour, description, priority,
     };
   };
 
@@ -72,12 +71,12 @@ const Ui = (() => {
                               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
                               <i class="bin"></i></div></td>`;
     const editString = `<td class="edit-column">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-task-modal">
                         <i></i></button></td>`;
     newRow.innerHTML = dateString + hourString + descriptionString +
     priorityString + eraseOptionString + editString;
     newRow.setAttribute('data-id', task.id);
-    newRow.setAttribute('data-list', task.list);
+    newRow.setAttribute('data-list', task.list.id);
     return newRow;
   };
 
@@ -110,23 +109,36 @@ const Ui = (() => {
     editDescriptionInput.value = taskValues.description;
   };
 
+  const changeModalDataset = (taskId, taskList) => {
+    editModal.setAttribute('data-taskid', taskId);
+    editModal.setAttribute('data-tasklist', taskList);
+  };
+
   const addListenerToNewEditTaskButton = function(taskValues) {
     const newEditButton = document.querySelector('#task-table-body tr:last-child .edit-column button');
     newEditButton.addEventListener('click', () => {
       fillEditModalwithTaskValues(taskValues);
-      // addListenerToAcceptEditButton(taskValues.id)
+      changeModalDataset(taskValues.id, taskValues.list.id);
+    });
   };
 
-  // const addListenerToAcceptEditButton = (taskId) => {
-  //   editButton.addEventListener('click', function() {
-  //     const editedValues = getEditedValues();
-  //
-  //   });
-  // };
+  const updateTask = (editedValues, taskId, taskList) => {
+    const taskDate = document.querySelector(`[data-id="${taskId}"][data-list ="${taskList}"] th`);
+    const taskHour = document.querySelector(`[data-id="${taskId}"][data-list ="${taskList}"] td:nth-child(1n)`);
+    const taskDescription = document.querySelector(`[data-id="${taskId}"][data-list ="${taskList}"] td:nth-child(3n)`);
+    const taskPriority = document.querySelector(`[data-id="${taskId}"][data-list ="${taskList}"] td:nth-child(4n)`);
+    taskDate.textContent = editedValues.date;
+    taskHour.textContent = editedValues.hour;
+    taskDescription.innerHTML = `<strong>${editedValues.description}</strong>`;
+    taskPriority.textContent = editedValues.priority;
+  };
 
   return {
+    getEditedValues,
+    updateTask,
     addListenerToNewEditTaskButton,
     cleanModal,
+    cleanEditModal,
     displayNewList,
     displayNewTask,
     getCurrentListId,

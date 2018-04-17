@@ -3,7 +3,7 @@ class List {
     this.tasks = [];
     this.id = id;
     this.name = name;
-    this.taskNumber = 0;
+    this.taskNumber = 5;
   }
 
   addTask(task) {
