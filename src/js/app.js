@@ -43,7 +43,7 @@ const Controller = (() => {
   };
 
   const getTaskValues = task => ({
-    date: task.date, hour: task.hour, priority: task.priority, description: task.description,
+    date: task.date, hour: task.hour, priority: task.priority, description: task.description, id: task.id, list: task.list,
   });
 
   const addListenerToTaskButton = () => {

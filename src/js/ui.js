@@ -9,6 +9,7 @@ const Ui = (() => {
   const checkedPriorityInput = document.querySelector('input[name="priorityRadios"]:checked');
   const descriptionInput = document.getElementById('task-description');
 
+  const editButton = document.getElementById('edit-task-button');
   const editModal = document.getElementById('edit-task-modal');
   const editDateInput = document.getElementById('edit-task-date');
   const editHourInput = document.getElementById('edit-task-hour');
@@ -26,6 +27,16 @@ const Ui = (() => {
     const hour = hourInput.value;
     const checkedPriority = checkedPriorityInput.value;
     const description = descriptionInput.value;
+    return {
+      date, hour, description, checkedPriority,
+    };
+  };
+
+  const getEditedValues = () => {
+    const date = editDateInput.value;
+    const hour = editHourInput.value;
+    const checkedPriority = editCheckedPriorityInput.value;
+    const description = editDescriptionInput.value;
     return {
       date, hour, description, checkedPriority,
     };
@@ -103,8 +114,15 @@ const Ui = (() => {
     const newEditButton = document.querySelector('#task-table-body tr:last-child .edit-column button');
     newEditButton.addEventListener('click', () => {
       fillEditModalwithTaskValues(taskValues);
-    });
+      // addListenerToAcceptEditButton(taskValues.id)
   };
+
+  // const addListenerToAcceptEditButton = (taskId) => {
+  //   editButton.addEventListener('click', function() {
+  //     const editedValues = getEditedValues();
+  //
+  //   });
+  // };
 
   return {
     addListenerToNewEditTaskButton,
