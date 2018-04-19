@@ -20,7 +20,42 @@ const Controller = (() => {
   const listElements = () => (document.querySelectorAll('#list-group .list-group-item'));
   const tableBody = document.getElementById('task-table-body');
   let listNumber = 6;
-  const allLists = [];
+  let allLists = [];
+  const inLoad = false;
+
+  // LOCAL STORAGE METHODS
+
+  const allListsObject = () => allLists.map(list => list.listObject);
+
+  const saveAllListsObject = () => {
+    const jsonAllLists = JSON.stringify(allListsObject());
+    localStorage.setItem('jsonAllLists', jsonAllLists);
+  };
+
+  const loadAllListsObject = () => {
+    const jsonAllLists = localStorage.getItem('jsonAllLists');
+    return JSON.parse(jsonAllLists);
+  };
+
+  const rebuildTasks = (tasksArray, listId) => {
+    for (const task of tasksArray) {
+      const newTask = new Task(listId, {
+        date: task.date, hour: task.hour, priority: task.priority, description: task.description, id: task.id, render: task.render,
+      });
+    }
+  };
+
+  const rebuildLists = () => {
+    allLists = [];
+    const listObjects = loadAllListsObject();
+    for (const list of listObjects) {
+      const newList = new List(list.id, list.name);
+      const taskList = rebuildTasks(list.tasks, list.id);
+      newList.tasks = [...taskList];
+      newList.taskNumber = list.taskNumber;
+      allLists.push(newList);
+    }
+  };
 
   // Find List & Task in allLists + get Task values (back-end)
 
@@ -96,6 +131,7 @@ const Controller = (() => {
         const listTobeDeleted = allLists.find(li => li.id === Number(listId));
         const listIndex = allLists.indexOf(listTobeDeleted);
         allLists.splice(listIndex, 1);
+        saveAllListsObject();
       });
     }
   };
@@ -108,6 +144,7 @@ const Controller = (() => {
       listElement.parentNode.removeChild(listElement);
       const listIndex = allLists.indexOf(newList);
       allLists.splice(listIndex, 1);
+      saveAllListsObject();
     });
   };
 
@@ -124,6 +161,7 @@ const Controller = (() => {
       addListenerToSwitchList(newList);
       switchActiveList(newList);
       refreshTable(newList);
+      saveAllListsObject();
     });
   };
 
@@ -138,6 +176,7 @@ const Controller = (() => {
       const taskIndex = currentList.tasks.indexOf(currentTask);
       currentList.tasks.splice(taskIndex, 1);
       taskElement.parentNode.removeChild(taskElement);
+      saveAllListsObject();
     });
   };
 
@@ -155,6 +194,7 @@ const Controller = (() => {
       Ui.addListenerToNewEditTaskButton(taskValues);
       addListenerToNewRemoveTaskCheckbox(taskValues.id, taskValues.list.id);
       Ui.cleanModal();
+      saveAllListsObject();
     });
   };
 
@@ -177,6 +217,7 @@ const Controller = (() => {
       Ui.updateTask(editedValues, taskId, taskList);
       updateAllLists(taskId, editedValues);
       $('#edit-task-modal').modal('toggle');
+      saveAllListsObject();
     });
   };
 
@@ -193,7 +234,7 @@ const Controller = (() => {
         const taskIndex = currentList.tasks.indexOf(currentTask);
         currentList.tasks.splice(taskIndex, 1);
         taskElement.parentNode.removeChild(taskElement);
-        // Rajouter une méthode Remove à chaque nouveau bouton.
+        saveAllListsObject();
       });
     }
   };
@@ -213,6 +254,9 @@ const Controller = (() => {
     }
   };
 
+  // localStorage methods
+
+
   return {
     addListenerToRemoveTaskCheckbox,
     addListenerToListButton,
@@ -224,6 +268,7 @@ const Controller = (() => {
   };
 })();
 
+Controller.rebuildLists();
 Controller.addListenerToListButton();
 Controller.addListenerToTaskButton();
 Controller.addListenerToEditTaskButton();

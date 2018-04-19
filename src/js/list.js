@@ -11,15 +11,14 @@ class List {
     this.taskNumber += 1;
   }
 
-  // get description() {
-  //   return `${this.name} is a ${this.breed} type of dog`;
-  // }
-  // set nicknames(value) {
-  //   this.nick = value.trim();
-  // }
-  // get nicknames() {
-  //   return this.nick.toUpperCase();
-  // }
+  listObject() {
+    return {
+      tasks: this.tasks.map(task => (task.taskObject())),
+      id: this.id,
+      name: this.name,
+      taskNumber: this.taskNumber,
+    };
+  }
 }
 
 export default List;

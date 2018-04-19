@@ -6,32 +6,20 @@ class Task {
     this.priority = options.priority;
     this.list = list;
     this.id = options.id || 1; // to be checked
-    this.render = '';
+    this.render = options.render || '';
   }
 
-  // get values() {
-  //   return {date: this.date,
-  //           hour: this.hour,
-  //           priority: this.priority,
-  //           description: this.description
-  //         };
-  // }
-
-  // bark() {
-  //   console.log(`Bark Bark! My name is ${this.name}`)
-  // }
-  // static info() {
-  //   console.log('A dog is better than a cat by 10 times');
-  // }
-  // get description() {
-  //   return `${this.name} is a ${this.breed} type of dog`;
-  // }
-  // set nicknames(value) {
-  //   this.nick = value.trim();
-  // }
-  // get nicknames() {
-  //   return this.nick.toUpperCase();
-  // }
+  taskObject() {
+    return {
+      date: this.date,
+      hour: this.hour,
+      description: this.description,
+      priority: this.priority,
+      list: this.list,
+      id: this.id,
+      render: this.render,
+    };
+  }
 }
 
 export default Task;

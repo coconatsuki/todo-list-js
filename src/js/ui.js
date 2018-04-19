@@ -132,10 +132,6 @@ const Ui = (() => {
     taskPriority.textContent = editedValues.priority;
   };
 
-  // Useful for the Remove Button
-
-
-
   return {
     createNewTableRow,
     getEditedValues,
