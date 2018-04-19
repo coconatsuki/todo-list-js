@@ -6,15 +6,16 @@ class Task {
     this.priority = options.priority;
     this.list = list;
     this.id = options.id || 1; // to be checked
+    this.render = '';
   }
 
-  get values() {
-    return {date: this.date,
-            hour: this.hour,
-            priority: this.priority,
-            description: this.description
-          };
-  }
+  // get values() {
+  //   return {date: this.date,
+  //           hour: this.hour,
+  //           priority: this.priority,
+  //           description: this.description
+  //         };
+  // }
 
   // bark() {
   //   console.log(`Bark Bark! My name is ${this.name}`)

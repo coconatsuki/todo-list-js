@@ -68,7 +68,7 @@ const Ui = (() => {
     const descriptionString = `<td><strong>${task.description}</strong></td>`;
     const priorityString = `<td><strong>${task.priority}</strong></td>`;
     const eraseOptionString = `<td><div class="form-check form-check-inline d-flex justify-content-around">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                              <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
                               <i class="bin"></i></div></td>`;
     const editString = `<td class="edit-column">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-task-modal">
@@ -80,9 +80,8 @@ const Ui = (() => {
     return newRow;
   };
 
-  const displayNewTask = (task) => {
-    const newRow = createNewTableRow(task);
-    tableBody.appendChild(newRow);
+  const displayNewTask = (task, row) => {
+    tableBody.appendChild(row);
     $('#taskModal').modal('toggle');
   };
 
@@ -133,7 +132,12 @@ const Ui = (() => {
     taskPriority.textContent = editedValues.priority;
   };
 
+  // Useful for the Remove Button
+
+
+
   return {
+    createNewTableRow,
     getEditedValues,
     updateTask,
     addListenerToNewEditTaskButton,

@@ -1,7 +1,9 @@
 remove BLOC folder.
 
-include html in task & list classes
 
-include listeners as well?
 
-class modal ? edit modal ?
+// Rajouter les Listener sur les nouvelles tâches après le switch ? (edit, update, remove)
+
+// Flags (toggle class priority => red, orange, green => css)
+
+// localStorage
