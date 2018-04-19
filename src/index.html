@@ -43,13 +43,7 @@
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#listModal">Add a list</button>
         </div>
 
-        <ul class="list-group list-group-flush" id="list-group">
-          <li class="list-group-item list-group-item-action active d-flex" data-id="1"><a href="#">Current list</a><i class="bin"></i></li>
-          <li class="list-group-item list-group-item-action d-flex" data-id="2"><a href="#">Garden</a><i class="bin"></i></li>
-          <li class="list-group-item list-group-item-action d-flex" data-id="3"><a href="#">Shopping</a><i class="bin"></i></li>
-          <li class="list-group-item list-group-item-action d-flex" data-id="4"><a href="#">Parties & Events</a><i class="bin"></i></li>
-          <li class="list-group-item list-group-item-action d-flex" data-id="5"><a href="#">Work</a><i class="bin"></i></li>
-        </ul>
+        <ul class="list-group list-group-flush" id="list-group"></ul>
       </section>
 
       <!-- EDIT MODAL -->
@@ -183,76 +177,7 @@
                   <th scole ="col">Edit</th>
                 </tr>
               </thead>
-              <tbody id="task-table-body">
-                <tr data-id="1" data-list="1">
-                  <th scope="row">April 10th</th>
-                  <td>18:00</td>
-                  <td><strong>Post Yudai's present</strong></td>
-                  <td>Moderate</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                  </td>
-                  <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
-                      <i ></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr data-id="2" data-list="1">
-                  <th scope="row">April 11th</th>
-                  <td>14:15</td>
-                  <td><strong>French class</strong></td>
-                  <td>High</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                  </td>
-                  <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
-                      <i ></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr data-id="3" data-list="1">
-                  <th scope="row">April 12th</th>
-                  <td>14:00</td>
-                  <td><strong>Fetch Mathieu</strong></td>
-                  <td>Moderate</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                  </td>
-                  <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
-                      <i ></i>
-                    </button>
-                  </td>
-                </tr>
-                <tr data-id="4" data-list="1">
-                  <th scope="row">April 12th</th>
-                  <td>19:00</td>
-                  <td><strong>Dance class</strong></td>
-                  <td>Moderate</td>
-                  <td>
-                    <div class="form-check form-check-inline d-flex justify-content-around">
-                      <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                      <i class="bin"></i>
-                    </div>
-                  </td>
-                  <td class="edit-column">
-                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#edit-task-modal">
-                      <i ></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody id="task-table-body"></tbody>
             </table>
           </div>
         </div>

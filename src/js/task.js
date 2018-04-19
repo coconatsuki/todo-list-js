@@ -5,7 +5,7 @@ class Task {
     this.description = options.description;
     this.priority = options.priority;
     this.list = list;
-    this.id = options.id || 1; // to be checked
+    this.id = options.id || 1;
     this.render = options.render || '';
   }
 

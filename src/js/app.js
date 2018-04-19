@@ -16,16 +16,34 @@ const Controller = (() => {
   const updateButton = document.getElementById('update-task-button');
   const removeTaskCheckboxes = document.querySelectorAll('.remove-input');
   const editModal = document.getElementById('edit-task-modal');
+  const listGroup = document.getElementById('list-group');
   const listElement = newList => (document.querySelector(`#list-group [data-id='${newList.id}']`));
   const listElements = () => (document.querySelectorAll('#list-group .list-group-item'));
   const tableBody = document.getElementById('task-table-body');
-  let listNumber = 6;
+  let listNumber = 1;
   let allLists = [];
   const inLoad = false;
 
+  // Switch list listener (for a new list)
+
+  const switchActiveList = function(newList) {
+    const activeList = document.querySelector('#list-group .active');
+    if (activeList) {
+      activeList.classList.remove('active');
+    }
+    listElement(newList).classList.add('active');
+  };
+
+  const refreshTable = function(newList) {
+    tableBody.innerHTML = '';
+    newList.tasks.forEach((task) => {
+      tableBody.appendChild(task.render);
+    });
+  };
+
   // LOCAL STORAGE METHODS
 
-  const allListsObject = () => allLists.map(list => list.listObject);
+  const allListsObject = () => (allLists.map(list => list.listObject()));
 
   const saveAllListsObject = () => {
     const jsonAllLists = JSON.stringify(allListsObject());
@@ -45,16 +63,29 @@ const Controller = (() => {
     }
   };
 
+  const displayAllLists = () => {
+    listGroup.innerHTML = allLists.map(list => list.render).join();
+  };
+
   const rebuildLists = () => {
     allLists = [];
     const listObjects = loadAllListsObject();
     for (const list of listObjects) {
       const newList = new List(list.id, list.name);
-      const taskList = rebuildTasks(list.tasks, list.id);
-      newList.tasks = [...taskList];
+      if (list.tasks.length > 0) {
+        const taskList = rebuildTasks(list.tasks, list.id);
+        newList.tasks = taskList;
+      } else {
+        newList.tasks = [];
+      }
       newList.taskNumber = list.taskNumber;
+      newList.render = list.render;
       allLists.push(newList);
     }
+    displayAllLists();
+    const firstListElement = listGroup.querySelector('.list-group-item:first-child');
+    switchActiveList(firstListElement);
+    refreshTable(allLists[0]);
   };
 
   // Find List & Task in allLists + get Task values (back-end)
@@ -92,25 +123,6 @@ const Controller = (() => {
     return newTask;
   };
 
-  // Switch list listener (for all lists)
-
-  // TO BE DONE
-
-  // Switch list listener (for a new list)
-
-  const switchActiveList = function(newList) {
-    const activeList = document.querySelector('#list-group .active');
-    activeList.classList.remove('active');
-    listElement(newList).classList.add('active');
-  };
-
-  const refreshTable = function(newList) {
-    tableBody.innerHTML = '';
-    newList.tasks.forEach((task) => {
-      tableBody.appendChild(task.render);
-    });
-  };
-
   const addListenerToSwitchList = function(newList) {
     listElement(newList).addEventListener('click', (event) => {
       event.preventDefault();
@@ -140,8 +152,9 @@ const Controller = (() => {
 
   const addListenerToNewRemoveListButton = function(newList) {
     const removeButton = listElement(newList).querySelector('.bin');
+    const currentListElement = listElement(newList);
     removeButton.addEventListener('click', () => {
-      listElement.parentNode.removeChild(listElement);
+      currentListElement.parentNode.removeChild(currentListElement);
       const listIndex = allLists.indexOf(newList);
       allLists.splice(listIndex, 1);
       saveAllListsObject();
@@ -154,7 +167,8 @@ const Controller = (() => {
     newListButton.addEventListener('click', () => {
       const listName = Ui.getNewListName();
       const newList = new List(listNumber, listName);
-      Ui.displayNewList(listName, newList.id);
+      newList.render = Ui.createNewList(listName, newList.id);
+      Ui.displayNewList(listName, newList.id, newList.render);
       listNumber += 1;
       allLists.push(newList);
       addListenerToNewRemoveListButton(newList);
@@ -223,7 +237,7 @@ const Controller = (() => {
 
   // Remove task for ALL Button listener (for existing button => TESTING)
 
-  const addListenerToRemoveTaskCheckbox = () => {
+  const addListenerToAllRemoveTaskCheckbox = () => {
     for (const checkbox of removeTaskCheckboxes) {
       checkbox.addEventListener('click', function() {
         const taskElement = this.parentElement.parentElement.parentElement;
@@ -239,9 +253,9 @@ const Controller = (() => {
     }
   };
 
-  // Edit task button listener (FOR TESTING):
+  // Edit ALL task button listener (FOR TESTING):
 
-  const addListenerToEditTaskButton = function() {
+  const addListenerToAllEditTaskButtons = function() {
     for (const editTaskButton of editTaskButtons) {
       editTaskButton.addEventListener('click', function() {
         const taskElement = this.parentElement.parentElement;
@@ -258,30 +272,23 @@ const Controller = (() => {
 
 
   return {
-    addListenerToRemoveTaskCheckbox,
+    addListenerToAllRemoveTaskCheckbox,
     addListenerToListButton,
     addListenerToTaskButton,
-    addListenerToEditTaskButton,
+    addListenerToAllEditTaskButtons,
     allLists,
     addListenerToUpdateButton,
     AddListenerToAllListsRemoveButton,
+    rebuildLists,
   };
 })();
 
-Controller.rebuildLists();
+if (localStorage.getItem('jsonAllLists')) {
+  Controller.rebuildLists();
+}
 Controller.addListenerToListButton();
 Controller.addListenerToTaskButton();
-Controller.addListenerToEditTaskButton();
+Controller.addListenerToAllEditTaskButtons();
 Controller.addListenerToUpdateButton();
-Controller.addListenerToRemoveTaskCheckbox();
+Controller.addListenerToAllRemoveTaskCheckbox();
 Controller.AddListenerToAllListsRemoveButton();
-
-// For testing the app only:
-
-const allTestTasks = Array.from(document.querySelectorAll('#task-table-body tr'));
-const listOfTasks = allTestTasks.map((task, index) => new Task(1, {
-  date: '2018-05-28', hour: '12:00', priority: 'Moderate', description: 'Some previous task', id: index + 1,
-}));
-const testList = new List(1, 'testList');
-Controller.allLists.push(testList);
-listOfTasks.forEach(task => testList.tasks.push(task));

@@ -3,7 +3,8 @@ class List {
     this.tasks = [];
     this.id = id;
     this.name = name;
-    this.taskNumber = 5;
+    this.taskNumber = 1;
+    this.render = '';
   }
 
   addTask(task) {
@@ -17,8 +18,17 @@ class List {
       id: this.id,
       name: this.name,
       taskNumber: this.taskNumber,
+      render: this.render,
     };
   }
+
+  // renderListandTasks() {
+  //   const li = this.render;
+  //   this.tasks.forEach((task) => {
+  //     li.appendChild(task.render);
+  //   });
+  //   return li;
+  // }
 }
 
 export default List;

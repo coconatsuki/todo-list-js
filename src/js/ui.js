@@ -52,9 +52,8 @@ const Ui = (() => {
     return newList;
   };
 
-  const displayNewList = function(listName, listId) {
-    const newList = createNewList(listName, listId);
-    listGroup.appendChild(newList);
+  const displayNewList = function(listName, listId, listElement) {
+    listGroup.appendChild(listElement);
     $('#listModal').modal('toggle');
     newListInput.value = '';
   };
@@ -133,6 +132,7 @@ const Ui = (() => {
   };
 
   return {
+    createNewList,
     createNewTableRow,
     getEditedValues,
     updateTask,
