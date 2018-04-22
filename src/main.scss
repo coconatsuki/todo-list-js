@@ -58,7 +58,7 @@ i {
   }
   &.active {
     background-color: #f8f9fa;
-    border-bottom: 2px dashed $dark-green;
+    border-bottom: 2px dashed $dark-green !important;
     border-top: none;
     a {
       font-weight: 600;

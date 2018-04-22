@@ -1,9 +1,12 @@
 remove BLOC folder.
 
+// Repair new Task creation => clean AddTaskModal after Task creation
 
+// Toggle modal after creating list (close it)
 
-// Rajouter les Listener sur les nouvelles tâches après le switch ? (edit, update, remove)
+// rebuilding tasks and editing tasks
+
+// Continue cleaning
+
 
 // Flags (toggle class priority => red, orange, green => css)
-
-// localStorage

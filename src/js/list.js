@@ -1,10 +1,9 @@
 class List {
-  constructor(id, name) {
+  constructor(options = {}) {
     this.tasks = [];
-    this.id = id;
-    this.name = name;
-    this.taskNumber = 1;
-    this.render = '';
+    this.id = options.id;
+    this.name = options.name;
+    this.taskNumber = options.taskNumber || 1;
   }
 
   addTask(task) {
@@ -18,8 +17,16 @@ class List {
       id: this.id,
       name: this.name,
       taskNumber: this.taskNumber,
-      render: this.render,
     };
+  }
+
+  render() {
+    const newList = document.createElement('li');
+    newList.classList.add('list-group-item');
+    newList.classList.add('list-group-item-action');
+    newList.innerHTML = `<a href="#">${this.name}</a><i class="bin"></i>`;
+    newList.setAttribute('data-id', this.id);
+    return newList;
   }
 
   // renderListandTasks() {
