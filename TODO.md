@@ -1,12 +1,7 @@
-remove BLOC folder.
+// Create task => submit doesn't work
 
-// Repair new Task creation => clean AddTaskModal after Task creation
-
-// Toggle modal after creating list (close it)
-
-// rebuilding tasks and editing tasks
-
-// Continue cleaning
-
+// Update form => must react with a submit listener.  => Denis.
 
 // Flags (toggle class priority => red, orange, green => css)
+
+// Heroku

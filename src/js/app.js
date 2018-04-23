@@ -32,19 +32,27 @@ const Controller = (() => {
   // -------------------------- REBUILD METHODS -------------------------- \\
 
   const rebuildTasks = (tasksArray, listId) => {
+    const tasks = [];
     for (const task of tasksArray) {
-      const newTask = new Task(listId, {
-        date: task.date, hour: task.hour, priority: task.priority, description: task.description, id: task.id, render: task.render,
+      const newTask = new Task({
+        list: listId,
+        date: task.date,
+        hour: task.hour,
+        priority: task.priority,
+        description: task.description,
+        id: task.id,
       });
+      tasks.push(newTask);
     }
+    return tasks;
   };
 
   const rebuildAllLists = (listObjects) => {
     for (const list of listObjects) {
       createNewList(list.name, list.id);
       if (list.tasks.length > 0) {
-        const taskList = rebuildTasks(list.tasks, list.id);
-        list.tasks = taskList;
+        const currentList = allLists.find(li => li.id === list.id);
+        currentList.tasks = rebuildTasks(list.tasks, list.id);
       }
     }
   };
@@ -53,7 +61,6 @@ const Controller = (() => {
     allLists = [];
     const listObjects = loadAllListsObject();
     rebuildAllLists(listObjects);
-    // displayAllLists();
     const firstListElement = Node.listGroup.querySelector('.list-group-item:first-child');
     const firstList = allLists.find(list => list.id === Number(firstListElement.dataset.id));
     Ui.switchActiveList(firstList);
@@ -94,8 +101,10 @@ const Controller = (() => {
   };
 
   const addListenerToUpdateModal = () => {
-    Node.updateButton.addEventListener('click', updateTask);
-    Node.updateTaskForm.addEventListener('submit', updateTask);
+    const but = Node.updateButton;
+    const form = Node.updateTaskForm;
+    but.addEventListener('click', updateTask);
+    form.addEventListener('submit', updateTask);
   };
 
   // ------------------ ADD A NEW TASK METHODS ----------------------------- \\
@@ -120,15 +129,15 @@ const Controller = (() => {
   };
 
   const addListenerToNewEditTaskButton = function(taskValues) {
-    Node.newEditButton.addEventListener('click', () => {
+    Node.newEditButton().addEventListener('click', () => {
       Ui.fillEditModalwithTaskValues(taskValues);
-      Ui.changeModalDatasetWithCurrentTask(taskValues.id, taskValues.list.id);
+      Ui.changeModalDatasetWithCurrentTask(taskValues.id, taskValues.list);
     });
   };
 
   const addAllListenersToNewTask = (newTask) => {
-    Ui.addListenerToNewEditTaskButton(newTask.taskObject());
-    addListenerToNewRemoveTaskCheckbox(newTask.id, newTask.list.id);
+    addListenerToNewEditTaskButton(newTask.taskObject());
+    addListenerToNewRemoveTaskCheckbox(newTask.id, newTask.list);
   };
 
   // Listeners on "Create new Task Modal" (button and form)
@@ -205,21 +214,27 @@ const Controller = (() => {
     allLists.push(newList);
   };
 
-  const createNewList = (name = 'Everything', listId = listNumber, event) => {
-    if (event) { event.preventDefault(); }
-    const listName = Ui.getNewListName() || name;
+  const createNewList = (name = 'Everything', listId = listNumber) => {
+    const listName = name;
     const newList = new List({ id: listId, name: listName });
-    Display.displayNewList(newList.render(), event);
+    Display.displayNewList(newList.render());
     addNewListToAllLists(newList);
     addAllListenersToNewList(newList);
     Ui.switchActiveList(newList);
+    return newList;
+  };
+
+  const createNewListFromEvent = (event) => {
+    event.preventDefault();
+    const newList = createNewList(Ui.getNewListName());
     Display.displayListTasks(newList);
     saveAllListsObject();
+    Display.closeModalNewList();
   };
 
   const addListenerToListButton = function() {
-    Node.newListButton.addEventListener('click', createNewList);
-    Node.addListForm.addEventListener('submit', createNewList);
+    Node.newListButton.addEventListener('click', createNewListFromEvent);
+    Node.addListForm.addEventListener('submit', createNewListFromEvent);
   };
 
   return {
@@ -239,7 +254,3 @@ if (localStorage.getItem('jsonAllLists')) {
 Controller.addListenerToListButton();
 Controller.addListenerToCreateTask();
 Controller.addListenerToUpdateModal();
-
-// Controller.addListenerToAllEditTaskButtons();
-// Controller.addListenerToAllRemoveTaskCheckbox();
-// Controller.AddListenerToAllListsRemoveButton();

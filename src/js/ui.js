@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 const Ui = (() => {
   const newListInput = document.getElementById('list-name');
   const dateInput = document.getElementById('task-date');
@@ -7,19 +5,19 @@ const Ui = (() => {
   const checkedPriorityInput = () => (document.querySelector('input[name="priorityRadios"]:checked'));
   const descriptionInput = document.getElementById('task-description');
 
-  const editModal = document.getElementById('edit-task-modal');
   const editDateInput = document.getElementById('edit-task-date');
   const editHourInput = document.getElementById('edit-task-hour');
   const editCheckedPriorityInput = () => (document.querySelector('input[name="edit-priorityRadios"]:checked'));
   const editDescriptionInput = document.getElementById('edit-task-description');
+
+  const editModal = document.getElementById('edit-task-modal');
   const listElement = newList => (document.querySelector(`#list-group [data-id='${newList.id}']`));
   const listElementBin = newList => (listElement(newList).querySelector('.bin'));
   const currrentActiveList = () => (document.querySelector('#list-group .active'));
   const getCurrentListId = () => Number(document.querySelector('.lists-sidebar .list-group-item.active').dataset.id);
+  const getNewListName = () => newListInput.value;
 
   // Get Values from the inputs:
-
-  const getNewListName = () => newListInput.value;
 
   const getNewTaskValues = (taskList, taskId) => {
     const date = dateInput.value;
@@ -91,7 +89,6 @@ const Ui = (() => {
   const getTaskList = function(taskElement) {
     return Number(taskElement.dataset.list);
   };
-
 
   return {
     getTaskId,

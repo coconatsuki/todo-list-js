@@ -7,9 +7,10 @@ const Display = (() => {
 
   const displayNewList = function(listElement, event) {
     listGroup.appendChild(listElement);
-    if (event !== undefined) { $('#listModal').modal('toggle'); }
     newListInput.value = '';
   };
+
+  const closeModalNewList = () => ($('#listModal').modal('toggle'));
 
   const displayListTasks = function(newList) {
     tableBody.innerHTML = '';
@@ -39,6 +40,7 @@ const Display = (() => {
     displayListTasks,
     displayNewTask,
     updateTaskHtml,
+    closeModalNewList,
   };
 })();
 

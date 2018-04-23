@@ -1,11 +1,11 @@
 class Task {
-  constructor(options = {}) {
-    this.date = options.date;
-    this.hour = options.hour;
-    this.description = options.description;
-    this.priority = options.priority;
-    this.list = options.list;
-    this.id = options.id || 1;
+  constructor({ date, hour, description, priority, list, id }) {
+    this.date = date;
+    this.hour = hour;
+    this.description = description;
+    this.priority = priority;
+    this.list = list;
+    this.id = id;
   }
 
   taskObject() {
@@ -34,7 +34,7 @@ class Task {
     newRow.innerHTML = dateString + hourString + descriptionString +
     priorityString + eraseOptionString + editString;
     newRow.setAttribute('data-id', this.id);
-    newRow.setAttribute('data-list', this.list.id);
+    newRow.setAttribute('data-list', this.list);
     return newRow;
   }
 }
