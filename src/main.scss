@@ -11,9 +11,12 @@ $pacifico-font: 'Pacifico', Arial, cursive;
 
 // -------------------------------GENERAL -------------------------------\\
 
+html, body, .container-fluid {
+  height:100%;
+}
+
 main.row {
-  min-height: 650px;
-  max-height: 650px;
+  flex-grow: 1;
 }
 
 i {
@@ -25,9 +28,6 @@ i {
   height: 56.8px;
 }
 
-// table td {
-//     border-top: none !important;
-// }
 
 // -------------------------------TITLE-ROW -------------------------------\\
 
@@ -117,14 +117,9 @@ i {
   }
 }
 
-td.flag-field {
-  display: flex;
-  justify-content: center;
-}
-
 .flag-field i {
-  height: 26px;
-  width: 26px;
+  display: block;
+  margin: 0 auto;
 }
 
 i.green-flag {
@@ -151,12 +146,6 @@ i.red-flag {
     font-weight: 700;
     font-size: 3em;
   }
-}
-
-#task-table-body .edit-column {
-  padding-top: 15%;
-  display: flex;
-  justify-content: center;
 }
 
 .edit-column button {

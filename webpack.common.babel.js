@@ -52,6 +52,7 @@ export default { // ES6 version of module.exports
             }
           }],
           fallback: 'style-loader', // If it doesn't work, this loader extracts it from the JSfile and put in the html Head instead.
+          publicPath: '/', // Fix CSS import link. => "Don't look at /css, but at the root."
         }),
       },
     ]

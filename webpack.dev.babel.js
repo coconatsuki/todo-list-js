@@ -14,7 +14,7 @@ const client = {
   }, // Needs to be launched with 'webpack-dev-server' => see package.json script.
   plugins: [
     new ExtractTextPlugin({ // This will tell the Plugin which name to give the css file it will extract from the app.js file.
-      filename: './[name].css', // So, we tell it to use the original name (from the /src folder).
+      filename: './css/[name].css', // So, we tell it to use the original name (from the /src folder).
       allChunks: true // ?
     }),
   ]
