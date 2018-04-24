@@ -17,10 +17,17 @@ main.row {
 }
 
 i {
-  height: 20px;
-  width: 20px;
-  display: block;
+  height: 24px;
+  width: 24px;
 }
+
+#task-table-body td {
+  height: 56.8px;
+}
+
+// table td {
+//     border-top: none !important;
+// }
 
 // -------------------------------TITLE-ROW -------------------------------\\
 
@@ -110,6 +117,16 @@ i {
   }
 }
 
+td.flag-field {
+  display: flex;
+  justify-content: center;
+}
+
+.flag-field i {
+  height: 26px;
+  width: 26px;
+}
+
 i.green-flag {
   background: url("./images/green-flag.png") no-repeat;
 }
@@ -146,9 +163,11 @@ i.red-flag {
   padding: 5%;
   border: none;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
   &:hover {
     background-color: transparent;
-    border: 1px solid $dark-green;
+    background-color: #EEE;
   }
   &:active {
     background-color: $pastel-blue !important;
@@ -156,6 +175,7 @@ i.red-flag {
   i {
     background: url("./images/edit2.png") no-repeat;
     background-position: -5px -2px;
+    display: flex;
   }
 }
 

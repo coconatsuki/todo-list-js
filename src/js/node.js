@@ -3,7 +3,8 @@ const Node = (() => {
   const tableBody = document.getElementById('task-table-body');
   const newListButton = document.getElementById('new-list-button');
   const addListForm = document.getElementById('add-list-form');
-  const newTaskButton = document.getElementById('new-task-button');
+  const taskModalButton = document.getElementById('task-modal-button');
+  const newTaskButton = document.getElementById('add-new-task-button');
   const editTaskButtons = document.querySelectorAll('.edit-column button');
   const updateButton = document.getElementById('update-task-button');
   const removeTaskCheckboxes = document.querySelectorAll('.remove-input');
@@ -29,6 +30,7 @@ const Node = (() => {
     editTaskButtons,
     updateButton,
     removeTaskCheckboxes,
+    taskModalButton,
     editModal,
     listElements,
     newListInput,

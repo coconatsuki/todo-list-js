@@ -57,14 +57,25 @@ const Controller = (() => {
     }
   };
 
+  const addListenersToLoadedTasks = (tasks) => {
+    for (const task of tasks) {
+      addAllListenersToNewTask(task);
+    }
+  };
+
   const rebuildLists = () => {
     allLists = [];
     const listObjects = loadAllListsObject();
-    rebuildAllLists(listObjects);
-    const firstListElement = Node.listGroup.querySelector('.list-group-item:first-child');
-    const firstList = allLists.find(list => list.id === Number(firstListElement.dataset.id));
-    Ui.switchActiveList(firstList);
-    Display.displayListTasks(allLists[0]);
+    if (listObjects && listObjects.length > 0) {
+      rebuildAllLists(listObjects);
+      const firstListElement = Node.listGroup.querySelector('.list-group-item:first-child');
+      const firstList = allLists.find(list => list.id === Number(firstListElement.dataset.id));
+      Ui.switchActiveList(firstList);
+      Display.displayListTasks(allLists[0]);
+      addListenersToLoadedTasks(allLists[0].tasks);
+    } else {
+      createNewList();
+    }
   };
 
   // Find List & Task in allLists + get Task values (back-end)
@@ -101,10 +112,7 @@ const Controller = (() => {
   };
 
   const addListenerToUpdateModal = () => {
-    const but = Node.updateButton;
-    const form = Node.updateTaskForm;
-    but.addEventListener('click', updateTask);
-    form.addEventListener('submit', updateTask);
+    Node.updateButton.addEventListener('click', updateTask);
   };
 
   // ------------------ ADD A NEW TASK METHODS ----------------------------- \\
@@ -128,15 +136,16 @@ const Controller = (() => {
     removeCheckbox.addEventListener('click', taskRemoveListener(taskId, taskList, taskElement));
   };
 
-  const addListenerToNewEditTaskButton = function(taskValues) {
+  const addListenerToNewEditTaskButton = function(task) {
     Node.newEditButton().addEventListener('click', () => {
-      Ui.fillEditModalwithTaskValues(taskValues);
-      Ui.changeModalDatasetWithCurrentTask(taskValues.id, taskValues.list);
+      const currentTask = allLists.find(li => li.id === task.list).tasks.find(ta => ta.id === task.id);
+      Ui.fillEditModalwithTaskValues(currentTask);
+      Ui.changeModalDatasetWithCurrentTask(currentTask.id, currentTask.list);
     });
   };
 
   const addAllListenersToNewTask = (newTask) => {
-    addListenerToNewEditTaskButton(newTask.taskObject());
+    addListenerToNewEditTaskButton(newTask);
     addListenerToNewRemoveTaskCheckbox(newTask.id, newTask.list);
   };
 
@@ -165,7 +174,6 @@ const Controller = (() => {
 
   const addListenerToCreateTask = () => {
     Node.newTaskButton.addEventListener('click', createTask);
-    Node.addTaskForm.addEventListener('submit', createTask);
   };
 
   // ------------------ ADD A NEW LIST METHODS ----------------------------- \\
@@ -175,12 +183,21 @@ const Controller = (() => {
   const removeListFromAllLists = (newList) => {
     const listIndex = allLists.indexOf(newList);
     allLists.splice(listIndex, 1);
+    if (allLists.length === 0) {
+      document.getElementById('task-modal-button').disabled = true;
+    }
   };
 
   const removeButtonListener = (currentListElement, newList) => (
     () => {
       currentListElement.parentNode.removeChild(currentListElement);
       removeListFromAllLists(newList);
+      Node.tableBody.innerHTML = '';
+      if (allLists.length > 0) {
+        Ui.switchActiveList(allLists[0]);
+        Display.displayListTasks(allLists[0]);
+        addListenersToLoadedTasks(allLists[0].tasks);
+      }
       saveAllListsObject();
     }
   );
@@ -198,6 +215,7 @@ const Controller = (() => {
       event.preventDefault();
       if (event.target.className === 'bin') { return; }
       Display.displayListTasks(newList);
+      addListenersToLoadedTasks(newList.tasks);
       Ui.switchActiveList(newList);
     });
   };
@@ -221,6 +239,7 @@ const Controller = (() => {
     addNewListToAllLists(newList);
     addAllListenersToNewList(newList);
     Ui.switchActiveList(newList);
+    document.getElementById('task-modal-button').disabled = false;
     return newList;
   };
 
@@ -246,11 +265,7 @@ const Controller = (() => {
   };
 })();
 
-if (localStorage.getItem('jsonAllLists')) {
-  Controller.rebuildLists();
-} else if (Node.listGroup.innerHTML === '') {
-  Controller.createNewList();
-}
+Controller.rebuildLists();
 Controller.addListenerToListButton();
 Controller.addListenerToCreateTask();
 Controller.addListenerToUpdateModal();

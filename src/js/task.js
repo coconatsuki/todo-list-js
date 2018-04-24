@@ -1,5 +1,7 @@
 class Task {
-  constructor({ date, hour, description, priority, list, id }) {
+  constructor({
+    date, hour, description, priority, list, id,
+  }) {
     this.date = date;
     this.hour = hour;
     this.description = description;
@@ -19,12 +21,23 @@ class Task {
     };
   }
 
+  setPriority() {
+    if (this.priority === 'Moderate') {
+      return '<td class="flag-field"><i class="orange-flag"></i></td>';
+    } else if (this.priority === 'High') {
+      return '<td class="flag-field"><i class="red-flag"></i></td>';
+    } else if (this.priority === 'Low') {
+      return '<td class="flag-field"><i class="green-flag"></i></td>';
+    }
+    return '<td class="flag-field"><i class="orange-flag"></i></td>';
+  }
+
   render() {
     const newRow = document.createElement('tr');
-    const dateString = `<th scope="row">${this.date}</th>`;
+    const dateString = `<td>${this.date}</th>`;
     const hourString = `<td>${this.hour}</td>`;
     const descriptionString = `<td><strong>${this.description}</strong></td>`;
-    const priorityString = `<td><strong>${this.priority}</strong></td>`;
+    const priorityString = this.setPriority();
     const eraseOptionString = `<td><div class="form-check form-check-inline d-flex justify-content-around">
     <input class="form-check-input remove-input" type="checkbox" id="inlineCheckbox1" value="option1">
     <i class="bin"></i></div></td>`;

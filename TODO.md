@@ -1,7 +1,3 @@
-// Create task => submit doesn't work
+// Table cells borders which behave oddly. => Find why and repair it (or remove table cells borders)
 
-// Update form => must react with a submit listener.  => Denis.
-
-// Flags (toggle class priority => red, orange, green => css)
-
-// Heroku
+// Make it responsive.
