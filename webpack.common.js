@@ -33,9 +33,12 @@ var _default = {
 
   },
   // we moved devserver in the dev config file.
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel-loader' // use babel to transform ES6 into ES5
 
