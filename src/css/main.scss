@@ -12,7 +12,8 @@ $pacifico-font: "Pacifico", Arial, cursive;
 
 html,
 body,
-.container-fluid {
+.container-fluid,
+#app {
   height: 100%;
 }
 
@@ -88,7 +89,7 @@ i {
 // ------------------------------ CURRENT LIST -------------------------------\\
 
 .current-list-container {
-  background: url("./images/coffee-note.jpg") no-repeat;
+  background: url("../images/coffee-note.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -121,19 +122,19 @@ i {
 }
 
 i.low-flag {
-  background: url("./images/green-flag.png") no-repeat;
+  background: url("../images/green-flag.png") no-repeat;
 }
 
 i.moderate-flag {
-  background: url("./images/orange-flag.png") no-repeat;
+  background: url("../images/orange-flag.png") no-repeat;
 }
 
 i.high-flag {
-  background: url("./images/red-flag.png") no-repeat;
+  background: url("../images/red-flag.png") no-repeat;
 }
 
 .bin {
-  background: url("./images/recycle-bin.png") no-repeat;
+  background: url("../images/recycle-bin.png") no-repeat;
 }
 
 .current-list-title {
@@ -160,7 +161,7 @@ i.high-flag {
     background-color: $pastel-blue !important;
   }
   i {
-    background: url("./images/edit2.png") no-repeat;
+    background: url("../images/edit2.png") no-repeat;
     background-position: -5px -2px;
     display: flex;
   }

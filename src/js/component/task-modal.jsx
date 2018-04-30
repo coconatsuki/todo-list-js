@@ -9,12 +9,12 @@ class TaskModal extends React.Component {
     this.state = {
       modal: false,
       // task: {
-      id: 1,
-      listId: 1,
-      date: '',
-      hour: '',
-      description: '',
-      priority: '',
+      id: props.id,
+      listId: props.listId,
+      date: props.date || '',
+      hour: props.hour || '',
+      description: props.description || '',
+      priority: props.priority || '',
       //}
     };
     this.toggle = this.toggle.bind(this);
@@ -53,28 +53,57 @@ class TaskModal extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    this.props.addTask({
-      date: this.state.date,
-      hour: this.state.hour,
-      priority: this.state.priority,
-      description: this.state.description,
-    });
+    if (this.props.addTask) {
+      this.props.addTask({
+        date: this.state.date,
+        hour: this.state.hour,
+        priority: this.state.priority,
+        description: this.state.description,
+      });
+    } else if (this.props.updateTask) {
+      this.props.updateTask(this.state.listId, this.state.id, {
+        date: this.state.date,
+        hour: this.state.hour,
+        priority: this.state.priority,
+        description: this.state.description,
+      });
+    }
     this.toggle();
     this.cleanModal();
   }
 
+  renderButton() {
+    if (this.props.addTask) {
+      return (
+        <Button key="button" color="primary" onClick={this.toggle}>
+          Add a new task
+        </Button>
+      );
+    } else {
+      return (
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#edit-task-modal"
+          onClick={this.toggle}
+        >
+          <i />
+        </button>
+      );
+    }
+  }
+
   render() {
     return [
-      <Button key="button" color="primary" onClick={this.toggle}>
-        Add a task
-      </Button>,
+      this.renderButton(),
       <Modal
         key="modal"
         isOpen={this.state.modal}
         toggle={this.toggle}
         size="lg"
       >
-        <ModalHeader toggle={this.toggle}>Add a new task</ModalHeader>
+        <ModalHeader toggle={this.toggle}>{this.props.headerText}</ModalHeader>
         <ModalBody>
           <TaskForm
             date={this.state.date}
@@ -87,7 +116,7 @@ class TaskModal extends React.Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleClick}>
-            Add task
+            {this.props.buttonText}
           </Button>{' '}
           <Button color="secondary" onClick={this.toggle}>
             Close
