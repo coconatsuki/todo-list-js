@@ -6,13 +6,14 @@ $pastel-blue: #8ea4d2;
 $dark-green: #496f5d;
 $light-green: #4c9f70;
 
-$pacifico-font: 'Pacifico', Arial, cursive;
-
+$pacifico-font: "Pacifico", Arial, cursive;
 
 // -------------------------------GENERAL -------------------------------\\
 
-html, body, .container-fluid {
-  height:100%;
+html,
+body,
+.container-fluid {
+  height: 100%;
 }
 
 main.row {
@@ -28,7 +29,6 @@ i {
   height: 56.8px;
 }
 
-
 // -------------------------------TITLE-ROW -------------------------------\\
 
 .title-row {
@@ -40,7 +40,6 @@ i {
     font-family: $pacifico-font;
   }
 }
-
 
 // ------------------------------- SIDEBAR -------------------------------\\
 
@@ -86,7 +85,6 @@ i {
   }
 }
 
-
 // ------------------------------ CURRENT LIST -------------------------------\\
 
 .current-list-container {
@@ -106,14 +104,14 @@ i {
     overflow-y: auto;
     width: 85%;
     max-height: 70%;
-    }
+  }
   .table {
     margin-top: 5%;
     width: 90%;
   }
   button {
-      width: 75%;
-      background-color: $dark-green;
+    width: 75%;
+    background-color: $dark-green;
   }
 }
 
@@ -122,19 +120,19 @@ i {
   margin: 0 auto;
 }
 
-i.green-flag {
+i.low-flag {
   background: url("./images/green-flag.png") no-repeat;
 }
 
-i.orange-flag {
-background: url("./images/orange-flag.png") no-repeat;
+i.moderate-flag {
+  background: url("./images/orange-flag.png") no-repeat;
 }
 
-i.red-flag {
+i.high-flag {
   background: url("./images/red-flag.png") no-repeat;
 }
 
-.bin  {
+.bin {
   background: url("./images/recycle-bin.png") no-repeat;
 }
 
@@ -156,7 +154,7 @@ i.red-flag {
   justify-content: center;
   &:hover {
     background-color: transparent;
-    background-color: #EEE;
+    background-color: #eee;
   }
   &:active {
     background-color: $pastel-blue !important;
@@ -168,10 +166,10 @@ i.red-flag {
   }
 }
 
-
 // ------------------------------ TASK MODAL -------------------------------\\
 
-#taskModal .form-group, #edit-task-modal .form-group {
+#taskModal .form-group,
+#edit-task-modal .form-group {
   margin: 0 3%;
   &:last-child {
     width: 60%;
