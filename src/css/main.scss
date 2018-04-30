@@ -137,6 +137,10 @@ i.high-flag {
   background: url("../images/recycle-bin.png") no-repeat;
 }
 
+.task-bin-container {
+  cursor: pointer;
+}
+
 .current-list-title {
   // border-bottom: 2px dashed $pastel-blue;
   width: 80%;

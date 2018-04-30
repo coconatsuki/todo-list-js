@@ -23,7 +23,7 @@ class AddListForm extends React.Component {
   handleChangeName(name) {
     this.setState({
       name,
-    })
+    });
   }
 
   handleSubmit(e) {
@@ -36,29 +36,40 @@ class AddListForm extends React.Component {
   }
 
   render() {
-    return ([
-      <Button key="button" color="primary" onClick={this.toggle}>Add a list</Button>,
+    return [
+      <Button key="button" color="primary" onClick={this.toggle}>
+        Add a list
+      </Button>,
       <Modal key="modal" isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Add a new to-do list</ModalHeader>
         <ModalBody>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <label forhtml="list-name" className="col-form-label">List name:</label>
-              <input type="text" className="form-control" id="list-name" value={this.state.name}
-                onChange={e => { this.handleChangeName(e.target.value) }} />
+              <label forhtml="list-name" className="col-form-label">
+                List name:
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="list-name"
+                value={this.state.name}
+                onChange={(e) => {
+                  this.handleChangeName(e.target.value);
+                }}
+              />
             </div>
           </form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={this.handleSubmit}>Add list</Button>{' '}
-          <Button color="secondary" onClick={this.toggle}>Close</Button>
+          <Button color="primary" onClick={this.handleSubmit}>
+            Add list
+          </Button>{' '}
+          <Button color="secondary" onClick={this.toggle}>
+            Close
+          </Button>
         </ModalFooter>
-      </Modal>
-
-
-
-
-    ]);
+      </Modal>,
+    ];
   }
 }
 

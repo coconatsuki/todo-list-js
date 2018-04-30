@@ -1,10 +1,10 @@
 import React from 'react';
+import { ListGroup, Button } from 'reactstrap';
+import { orderBy } from 'lodash';
 import AddListForm from './add-list-form';
 import List from './list';
 import Task from './task';
 import TaskModal from './task-modal';
-import { ListGroup, Button } from 'reactstrap';
-import { orderBy } from 'lodash';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,32 +25,19 @@ class App extends React.Component {
     this.changeActiveList = this.changeActiveList.bind(this);
   }
 
+  componentDidUpdate() {
+    this.saveToLocalStorage();
+  }
+
   saveToLocalStorage() {
     const jsonAllLists = JSON.stringify(this.state);
     localStorage.setItem('state', jsonAllLists);
-  }
-
-  addList(name) {
-    const list = { name, id: this.state.allLists.length + 1, tasks: [] };
-    this.setState({
-      allLists: [...this.state.allLists, list],
-      currentListId: list.id,
-    });
-    this.saveToLocalStorage();
-  }
-
-  removeList(id) {
-    this.setState({
-      allLists: this.state.allLists.filter(li => li.id !== id),
-    });
-    this.saveToLocalStorage();
   }
 
   changeActiveList(id) {
     this.setState({
       currentListId: id,
     });
-    this.saveToLocalStorage();
   }
 
   findList(listId) {
@@ -69,7 +56,24 @@ class App extends React.Component {
     return this.state.allLists.filter(li => li.id !== listId);
   }
 
-  addTask({ date, hour, priority, description }) {
+  addList(name) {
+    const list = { name, id: this.state.allLists.length + 1, tasks: [] };
+    this.setState({
+      allLists: [...this.state.allLists, list],
+      currentListId: list.id,
+    });
+  }
+
+  removeList(id) {
+    this.setState({
+      allLists: this.state.allLists.filter(li => li.id !== id),
+    });
+    changeActiveList(this.allLists[0].id);
+  }
+
+  addTask({
+    date, hour, priority, description,
+  }) {
     const list = this.currentList();
     const otherLists = this.filterLists(list.id);
     const task = {
@@ -84,7 +88,6 @@ class App extends React.Component {
     this.setState({
       allLists: [...otherLists, list],
     });
-    this.saveToLocalStorage();
   }
 
   removeTask(listId, taskId) {
@@ -96,7 +99,6 @@ class App extends React.Component {
     this.setState({
       allLists: [...otherLists, list],
     });
-    this.saveToLocalStorage();
   }
 
   updateTask(listId, taskId, taskValues) {
@@ -112,7 +114,6 @@ class App extends React.Component {
     this.setState({
       allLists: [...otherLists, list],
     });
-    this.saveToLocalStorage();
   }
 
   orderedList() {
@@ -164,12 +165,24 @@ class App extends React.Component {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th scope="col">Date</th>
-                      <th scope="col">Time</th>
-                      <th scope="col">Task</th>
-                      <th scope="col">Priority</th>
-                      <th scope="col">Done?</th>
-                      <th scole="col">Edit</th>
+                      <th scope="col" className="text-center">
+                        Date
+                      </th>
+                      <th scope="col" className="text-center">
+                        Time
+                      </th>
+                      <th scope="col" className="text-center">
+                        Description
+                      </th>
+                      <th scope="col" className="text-center">
+                        Priority
+                      </th>
+                      <th scope="col" className="text-center">
+                        Done?
+                      </th>
+                      <th scole="col" className="text-center">
+                        Edit
+                      </th>
                     </tr>
                   </thead>
                   <tbody id="task-table-body">

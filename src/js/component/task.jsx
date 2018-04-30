@@ -1,5 +1,4 @@
 import React from 'react';
-import { ListGroupItem } from 'reactstrap';
 import TaskModal from './task-modal';
 
 class Task extends React.Component {
@@ -16,14 +15,14 @@ class Task extends React.Component {
       <tr>
         <td>{this.props.task.date}</td>
         <td>{this.props.task.hour}</td>
-        <td className="flag-field">
+        <td className="text-center">
+          <strong>{this.props.task.description}</strong>
+        </td>
+        <td className="flag-field text-center">
           <i className={`${this.props.task.priority}-flag`} />
         </td>
         <td>
-          <strong>{this.props.task.description}</strong>
-        </td>
-        <td>
-          <div className="form-check form-check-inline d-flex justify-content-around">
+          <div className="form-check form-check-inline d-flex task-bin-container justify-content-center">
             <i
               className="bin"
               onClick={() =>

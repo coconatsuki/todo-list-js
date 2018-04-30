@@ -1,6 +1,6 @@
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import React from 'react';
 import TaskForm from './task-form';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class TaskModal extends React.Component {
   constructor(props) {
@@ -8,14 +8,12 @@ class TaskModal extends React.Component {
 
     this.state = {
       modal: false,
-      // task: {
       id: props.id,
       listId: props.listId,
       date: props.date || '',
       hour: props.hour || '',
       description: props.description || '',
       priority: props.priority || '',
-      //}
     };
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,7 +30,6 @@ class TaskModal extends React.Component {
   handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
-
     this.setState({
       [name]: value,
     });
@@ -79,19 +76,19 @@ class TaskModal extends React.Component {
           Add a new task
         </Button>
       );
-    } else {
-      return (
-        <button
-          type="button"
-          className="btn btn-primary"
-          data-toggle="modal"
-          data-target="#edit-task-modal"
-          onClick={this.toggle}
-        >
-          <i />
-        </button>
-      );
     }
+    return (
+      <button
+        key="modal-button"
+        type="button"
+        className="btn btn-primary"
+        data-toggle="modal"
+        data-target="#edit-task-modal"
+        onClick={this.toggle}
+      >
+        <i />
+      </button>
+    );
   }
 
   render() {

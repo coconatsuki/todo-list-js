@@ -1,11 +1,13 @@
 import React from 'react';
 import { ListGroupItem } from 'reactstrap';
 
-const List = ({ id, name, removeList, changeActiveList, active }) => (
+const List = ({
+  id, name, removeList, changeActiveList, active,
+}) => (
   <ListGroupItem className={active ? 'active' : ''} action>
     <a
       href="#"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         changeActiveList(id);
       }}
@@ -14,10 +16,9 @@ const List = ({ id, name, removeList, changeActiveList, active }) => (
     </a>
     <i
       className="bin"
-      onClick={e => {
+      onClick={(e) => {
         e.preventDefault();
         removeList(id);
-        // Here, we need a wrapper function so that the "removeList(id)" don't get executed right away.
       }}
     />
   </ListGroupItem>

@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import React from 'react';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 
 const TaskForm = ({
   date,
@@ -7,7 +7,7 @@ const TaskForm = ({
   priority,
   description,
   handleChange,
-  handlePriorityChange
+  handlePriorityChange,
 }) => (
   <Form className="d-flex justify-content-around">
     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -38,9 +38,9 @@ const TaskForm = ({
             type="radio"
             name="edit-priorityRadios"
             value="moderate"
-            checked={priority === "moderate"}
+            checked={priority === 'moderate'}
             onChange={handlePriorityChange}
-          />{" "}
+          />{' '}
           Normal
         </Label>
       </FormGroup>
@@ -50,9 +50,9 @@ const TaskForm = ({
             type="radio"
             name="edit-priorityRadios"
             value="high"
-            checked={priority === "high"}
+            checked={priority === 'high'}
             onChange={handlePriorityChange}
-          />{" "}
+          />{' '}
           High
         </Label>
       </FormGroup>
@@ -62,9 +62,9 @@ const TaskForm = ({
             type="radio"
             name="edit-priorityRadios"
             value="low"
-            checked={priority === "low"}
+            checked={priority === 'low'}
             onChange={handlePriorityChange}
-          />{" "}
+          />{' '}
           Low
         </Label>
       </FormGroup>
