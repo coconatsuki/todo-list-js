@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListGroupItem } from 'reactstrap';
 
-const Task = ({ task }) => (
+const Task = ({ task, removeTask }) => (
   <tr>
     <td>{task.date}</td>
     <td>{task.hour}</td>
@@ -13,13 +13,7 @@ const Task = ({ task }) => (
     </td>
     <td>
       <div className="form-check form-check-inline d-flex justify-content-around">
-        <input
-          className="form-check-input remove-input"
-          type="checkbox"
-          id="inlineCheckbox1"
-          value="option1"
-        />
-        <i className="bin" />
+        <i className="bin" onClick={() => removeTask(task.listId, task.id)} />
       </div>
     </td>
     <td className="edit-column">

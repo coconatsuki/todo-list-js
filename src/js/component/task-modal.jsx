@@ -44,6 +44,13 @@ class TaskModal extends React.Component {
     });
   }
 
+  cleanModal() {
+    this.state.date = '';
+    this.state.hour = '';
+    this.state.priority = '';
+    this.state.description = '';
+  }
+
   handleClick(e) {
     e.preventDefault();
     this.props.addTask({
@@ -53,6 +60,7 @@ class TaskModal extends React.Component {
       description: this.state.description,
     });
     this.toggle();
+    this.cleanModal();
   }
 
   render() {
