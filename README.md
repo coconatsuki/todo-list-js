@@ -10,7 +10,7 @@ To launch the app:
 yarn dev
 ```
 
----
+## Actually working on: some bug that appears when removing the current active list.
 
 When I first built this app, it was meant to practice React, ES6 and get used to webpack & babel & ESLint configuration.
 I had to try, as much as possible, to separate(in different modules) my application logic from the DOM-related methods.

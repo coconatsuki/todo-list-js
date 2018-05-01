@@ -1,17 +1,19 @@
 import React from 'react';
 import { ListGroup, Button } from 'reactstrap';
-import { orderBy } from 'lodash';
+import { orderBy, maxBy } from 'lodash';
 import AddListForm from './add-list-form';
 import List from './list';
 import Task from './task';
 import TaskModal from './task-modal';
+import EverythingList from './everything-list';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = JSON.parse(localStorage.getItem('state')) || {
-      allLists: [{ id: 1, name: 'Everything', tasks: [] }],
+      everythingList: { id: 1, name: 'Everything', tasks: [] },
+      allLists: [],
       currentListId: 1,
     };
     this.addList = this.addList.bind(this);
@@ -23,6 +25,8 @@ class App extends React.Component {
     this.filterLists = this.filterLists.bind(this);
     this.updateTask = this.updateTask.bind(this);
     this.changeActiveList = this.changeActiveList.bind(this);
+    this.setNewListId = this.setNewListId.bind(this);
+    this.makeEverythingListActive = this.makeEverythingListActive.bind(this);
   }
 
   componentDidUpdate() {
@@ -37,6 +41,12 @@ class App extends React.Component {
   changeActiveList(id) {
     this.setState({
       currentListId: id,
+    });
+  }
+
+  makeEverythingListActive() {
+    this.setState({
+      currentListId: 1,
     });
   }
 
@@ -56,8 +66,19 @@ class App extends React.Component {
     return this.state.allLists.filter(li => li.id !== listId);
   }
 
+  setNewListId() {
+    if (this.state.allLists.length === 0) {
+      return 2;
+    }
+    return _.maxBy(this.state.allLists, 'id').id + 1;
+  }
+
   addList(name) {
-    const list = { name, id: this.state.allLists.length + 1, tasks: [] };
+    const list = {
+      name,
+      id: this.setNewListId(),
+      tasks: [],
+    };
     this.setState({
       allLists: [...this.state.allLists, list],
       currentListId: list.id,
@@ -68,7 +89,7 @@ class App extends React.Component {
     this.setState({
       allLists: this.state.allLists.filter(li => li.id !== id),
     });
-    changeActiveList(this.allLists[0].id);
+    this.makeEverythingListActive();
   }
 
   addTask({
@@ -136,6 +157,12 @@ class App extends React.Component {
               />
             </div>
             <ul className="list-group list-group-flush" id="list-group">
+              <EverythingList
+                id={this.state.everythingList.id}
+                name={this.state.everythingList.name}
+                changeActiveList={this.changeActiveList}
+                active={this.state.currentListId === 1}
+              />
               {this.orderedList().map(e => (
                 <List
                   id={e.id}

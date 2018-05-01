@@ -1,6 +1,5 @@
-// TODO : REPAIR REMOVE CURRENT LIST
-
-// TODO : REVIEW ORDER WHEN ADDING A LIST (it comes before the old loaded ones)
+// TODO : CREATE A "EVERYTHING LIST" that contains all the tasks.
+(repair, and make all the tasks being saved inside).
 
 // TODO : add validations
 
