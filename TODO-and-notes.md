@@ -1,4 +1,6 @@
-// TODO : add validations
+// TODO : add tasks validations
+
+// TODO : add props validations
 
 // TODO : Make it responsive.
 
