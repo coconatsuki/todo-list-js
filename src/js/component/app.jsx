@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListGroup, Button } from 'reactstrap';
-import { orderBy } from 'lodash';
+import { orderBy, maxBy } from 'lodash';
 import AddListForm from './add-list-form';
 import List from './list';
 import Task from './task';
@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
 
     this.state = JSON.parse(localStorage.getItem('state')) || {
-      allLists: [{ id: 1, name: 'Everything', tasks: [] }],
+      allLists: [{ id: 1, name: 'Anything', tasks: [] }],
       currentListId: 1,
     };
     this.addList = this.addList.bind(this);
@@ -57,7 +57,11 @@ class App extends React.Component {
   }
 
   addList(name) {
-    const list = { name, id: this.state.allLists.length + 1, tasks: [] };
+    const list = {
+      name,
+      id: maxBy(this.state.allLists, 'id').id + 1,
+      tasks: [],
+    };
     this.setState({
       allLists: [...this.state.allLists, list],
       currentListId: list.id,
@@ -65,10 +69,17 @@ class App extends React.Component {
   }
 
   removeList(id) {
+    if (id === 1) {
+      return;
+    }
+    const nextLists = this.state.allLists.filter(li => li.id !== id);
     this.setState({
-      allLists: this.state.allLists.filter(li => li.id !== id),
+      allLists: nextLists,
+      currentListId:
+        id === this.state.currentListId
+          ? nextLists[0].id
+          : this.state.currentListId,
     });
-    changeActiveList(this.allLists[0].id);
   }
 
   addTask({

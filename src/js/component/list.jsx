@@ -14,13 +14,15 @@ const List = ({
     >
       {name}
     </a>
-    <i
-      className="bin"
-      onClick={(e) => {
-        e.preventDefault();
-        removeList(id);
-      }}
-    />
+    {id !== 1 ? (
+      <i
+        className="bin"
+        onClick={(e) => {
+          e.preventDefault();
+          removeList(id);
+        }}
+      />
+    ) : null}
   </ListGroupItem>
 );
 

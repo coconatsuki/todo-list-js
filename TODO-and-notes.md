@@ -1,7 +1,3 @@
-// TODO : REPAIR REMOVE CURRENT LIST
-
-// TODO : REVIEW ORDER WHEN ADDING A LIST (it comes before the old loaded ones)
-
 // TODO : add validations
 
 // TODO : Make it responsive.
