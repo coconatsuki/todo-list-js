@@ -1,0 +1,182 @@
+@import "~bootstrap/scss/bootstrap";
+
+$deep-blue: #49516f;
+$sky-blue: #6279b8;
+$pastel-blue: #8ea4d2;
+$dark-green: #496f5d;
+$light-green: #4c9f70;
+
+$pacifico-font: "Pacifico", Arial, cursive;
+
+// -------------------------------GENERAL -------------------------------\\
+
+html,
+body,
+.container-fluid,
+#app {
+  height: 100%;
+}
+
+main.row {
+  flex-grow: 1;
+}
+
+i {
+  height: 24px;
+  width: 24px;
+}
+
+#task-table-body td {
+  height: 56.8px;
+}
+
+// -------------------------------TITLE-ROW -------------------------------\\
+
+.title-row {
+  background-color: $deep-blue;
+  border-bottom: 8px dashed #8ea4d2;
+  box-shadow: 0 1px 6px rgba(29, 68, 131, 1);
+  h1 {
+    color: white;
+    font-family: $pacifico-font;
+  }
+}
+
+// ------------------------------- SIDEBAR -------------------------------\\
+
+.lists-sidebar {
+  border-right: 6px double $deep-blue;
+  overflow-y: auto;
+  .list-group {
+    margin-top: 15%;
+  }
+}
+
+.list-group li {
+  justify-content: space-between;
+  display: flex;
+  i {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: $dark-green;
+    width: 70%;
+  }
+  &.active {
+    background-color: #f8f9fa;
+    border-bottom: 2px dashed $dark-green !important;
+    border-top: none;
+    a {
+      font-weight: 600;
+    }
+  }
+}
+
+.sidebar-title {
+  h4 {
+    text-align: center;
+    color: $deep-blue;
+    font-weight: 700;
+    font-size: 2em;
+  }
+  button {
+    width: 100%;
+    background-color: $dark-green;
+  }
+}
+
+// ------------------------------ CURRENT LIST -------------------------------\\
+
+.current-list-container {
+  background: url("../images/coffee-note.jpg") no-repeat;
+  background-size: cover;
+}
+
+.current-list-block {
+  margin-top: 3%;
+  height: 85%;
+  width: 65%;
+  background-color: white;
+  opacity: 0.94;
+  border-radius: 25%;
+  box-shadow: 0 1px 6px rgba(94, 73, 76, 1);
+  .table-container {
+    overflow-y: auto;
+    width: 85%;
+    max-height: 70%;
+  }
+  .table {
+    margin-top: 5%;
+    width: 90%;
+  }
+  button {
+    width: 75%;
+    background-color: $dark-green;
+  }
+}
+
+.flag-field i {
+  display: block;
+  margin: 0 auto;
+}
+
+i.low-flag {
+  background: url("../images/green-flag.png") no-repeat;
+}
+
+i.moderate-flag {
+  background: url("../images/orange-flag.png") no-repeat;
+}
+
+i.high-flag {
+  background: url("../images/red-flag.png") no-repeat;
+}
+
+.bin {
+  background: url("../images/recycle-bin.png") no-repeat;
+}
+
+.task-bin-container {
+  cursor: pointer;
+}
+
+.current-list-title {
+  // border-bottom: 2px dashed $pastel-blue;
+  width: 80%;
+  h2 {
+    color: $deep-blue;
+    font-weight: 700;
+    font-size: 3em;
+  }
+}
+
+.edit-column button {
+  padding: 5%;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  &:hover {
+    background-color: transparent;
+    background-color: #eee;
+  }
+  &:active {
+    background-color: $pastel-blue !important;
+  }
+  i {
+    background: url("../images/edit2.png") no-repeat;
+    background-position: -5px -2px;
+    display: flex;
+  }
+}
+
+// ------------------------------ TASK MODAL -------------------------------\\
+
+#taskModal .form-group,
+#edit-task-modal .form-group {
+  margin: 0 3%;
+  &:last-child {
+    width: 60%;
+  }
+}

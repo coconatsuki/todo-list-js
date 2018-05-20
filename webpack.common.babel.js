@@ -12,10 +12,13 @@ export default { // ES6 version of module.exports
     path: path.resolve(__dirname, 'dist') // resolve slash incompatibility with Windows.
   },
   // we moved devserver in the dev config file.
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader', // use babel to transform ES6 into ES5
       }, // it's better to write Babel config in its own file .babelrc, to use it outsite of webpack.
